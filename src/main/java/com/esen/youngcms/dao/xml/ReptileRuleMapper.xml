@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.ReptileRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.ReptileRule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="coding" property="coding" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="time_format" property="timeFormat" jdbcType="VARCHAR" />
+    <result column="reptile_url" property="reptileUrl" jdbcType="VARCHAR" />
+    <result column="content_completion_url" property="contentCompletionUrl" jdbcType="VARCHAR" />
+    <result column="image_completion_url" property="imageCompletionUrl" jdbcType="VARCHAR" />
+    <result column="is_reptile_image" property="isReptileImage" jdbcType="INTEGER" />
+    <result column="title_start" property="titleStart" jdbcType="VARCHAR" />
+    <result column="title_end" property="titleEnd" jdbcType="VARCHAR" />
+    <result column="description_start" property="descriptionStart" jdbcType="VARCHAR" />
+    <result column="description_end" property="descriptionEnd" jdbcType="VARCHAR" />
+    <result column="content_start" property="contentStart" jdbcType="VARCHAR" />
+    <result column="content_end" property="contentEnd" jdbcType="VARCHAR" />
+    <result column="keywords_start" property="keywordsStart" jdbcType="VARCHAR" />
+    <result column="keywords_end" property="keywordsEnd" jdbcType="VARCHAR" />
+    <result column="publish_time_start" property="publishTimeStart" jdbcType="VARCHAR" />
+    <result column="publish_time_end" property="publishTimeEnd" jdbcType="VARCHAR" />
+    <result column="author_start" property="authorStart" jdbcType="VARCHAR" />
+    <result column="author_end" property="authorEnd" jdbcType="VARCHAR" />
+    <result column="source_start" property="sourceStart" jdbcType="VARCHAR" />
+    <result column="source_end" property="sourceEnd" jdbcType="VARCHAR" />
+    <result column="from_url_start" property="fromUrlStart" jdbcType="VARCHAR" />
+    <result column="from_url_end" property="fromUrlEnd" jdbcType="VARCHAR" />
+    <result column="read_number_start" property="readNumberStart" jdbcType="VARCHAR" />
+    <result column="read_number_end" property="readNumberEnd" jdbcType="VARCHAR" />
+    <result column="content_all_start" property="contentAllStart" jdbcType="VARCHAR" />
+    <result column="content_all_end" property="contentAllEnd" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="reptile_number" property="reptileNumber" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, coding, number, time_format, reptile_url, content_completion_url, image_completion_url, 
+    is_reptile_image, title_start, title_end, description_start, description_end, content_start, 
+    content_end, keywords_start, keywords_end, publish_time_start, publish_time_end, 
+    author_start, author_end, source_start, source_end, from_url_start, from_url_end, 
+    read_number_start, read_number_end, content_all_start, content_all_end, create_time, 
+    create_user, reptile_number, status
+  </sql>
+  
+</mapper>

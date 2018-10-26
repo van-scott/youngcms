@@ -1,0 +1,49 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/dict/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>名称</label> <input type="text" name="title" value="${(pageForm.title)! }" />
+			</p>
+			<p>
+				<label>所属广告位</label>
+				<select name="advertPositionId">
+				    <#list ADVERT_POSITION_LIST as labelValue>
+				         <option value="${labelValue.id }" <#if pageForm.advertPositionId?? && labelValue.id==pageForm.advertPositionId>selected="selected"</#if>>${labelValue.name }</option>
+				    </#list>
+				</select>
+			</p>
+			<p>
+				<label>开始时间</label> 
+				<input type="text" name="startTime" class="date" value="${(pageForm.startTime)! }"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</p>
+			<p>
+				<label>结束时间</label> 
+				<input type="text" name="endTime" class="date" value="${(pageForm.endTime)! }"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</p>
+			<p class="nowrap">
+				<label>图片链接</label>
+				<input type="text" id="imgUrl" name="imgUrl" value="${(pageForm.imgUrl)! }" size="50"/>
+				<input type="file" id="imgUrlFile" name="imgUrlFile" style="display: none;" onchange="upload.ajaxFileUpload('imgUrlFile','imgUrl','dialog');"/>
+				<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('imgUrlFile');"><span>上传</span></a>
+			</p>
+			<p class="nowrap">
+				<label>链接地址</label> <input type="text" name="url" value="${(pageForm.url)! }" size="50"/>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:advert:addOrUpdate">
+				    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+

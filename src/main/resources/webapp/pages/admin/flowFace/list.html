@@ -1,0 +1,60 @@
+<#include "/admin/inc/ctx.html">
+<#include "/admin/inc/pagerForm.html">
+<div class="pageHeader" style="display: none;">
+	<form rel="pagerForm" action="${ctx}/admin/flowFace/list">
+	  <input type="hidden" name="flowId" value="${pageData.bean.flowId}"/>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		    <@shiro.hasPermission name="admin:flowFace:form">
+			<li><a  href="${ctx}/admin/flowFace/form?flowId=${pageData.bean.flowId}" rel="flowFace" target="dialog" width="450" height="320"><i class="fa fa-plus"></i>添加</a></a></li>
+			</@shiro.hasPermission>
+		</ul>
+	</div>
+
+	<div layoutH="56">
+	<table class="list"  targetType="navTab">
+		<thead>
+		  <tr>
+	        <th width="1%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+	        <th width="2%">编号</th>
+	        <th width="5%">名称</th>
+	        <th width="8%">角色</th>
+	        <th width="5%">描述</th>
+	        <th width="2%">排序</th>
+            <th width="5%">操作</th>
+            </tr>
+		</thead>
+		<tbody>
+         <#list pageData.page.records as bean>
+	        <tr align="center" target="id" rel="${bean.id }">
+	        <td><input  type="checkbox" name="ids" value="${bean.id }" /></td>
+	        <td>${bean.id }</td>
+	        <td>${bean.name }</td>
+	        <td>${bean.roleNames }</td>
+	        <td>${bean.description }</td>
+	        <td>${bean.sort }</td>
+	        <td align="center">
+	            <@shiro.hasPermission name="admin:flowFace:delete">
+				<a title="删除" target="ajaxTodo"  callback="dialogRefresh" href="${ctx }/admin/flowFace/delete?flowId=${bean.flowId}&id=${bean.id}"  class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:flowFace:form">
+				<a title="编辑" target="dialog" rel="flowFace" width="450" height="320" href="${ctx}/admin/flowFace/form?id=${bean.id }" class="editButton"><i class="fa fa-file-text-o"></i>&nbsp;编辑</a>
+				</@shiro.hasPermission>
+			</td>
+	        </tr>
+	        </#list>
+		</tbody>
+	</table>
+	</div>
+	<div class="formBar">
+			<ul>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+	</div>
+</div>

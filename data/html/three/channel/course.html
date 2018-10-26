@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=utf-8>
+<title>youngcms-免费的JAVA CMS-内容管理系统-技术分享</title>
+<link href="/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/css/news.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.Xslider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<div class="wrap_top">
+    	<div class="top">
+        	<div class="logo"><a href="#"><img src="/static/three/images/logo.png" width="200" height="74" /></a></div>
+            <div id="navMenu">
+                <ul class="menu1">
+					   <li><a href="/channel/index">网站首页</a>
+				       </li>
+				       <li><a href="" target="_black">技术分享</a></li>
+					   <li><a href="/channel/photo">精彩图库</a>
+						        <ul>
+										 <li><a href="/channel/yule">娱乐图集</a></li>
+										 <li><a href="/channel/wenhua">文化校园</a></li>
+										 <li><a href="/channel/fouce">焦点图片</a></li>
+										 <li><a href="/channel/zuguo">祖国之美</a></li>
+								</ul>
+				       </li>
+					   <li><a href="/channel/news">新闻资讯</a>
+						        <ul>
+										 <li><a href="/channel/it_news">IT资讯</a></li>
+										 <li><a href="/channel/sys_news">系统介绍</a></li>
+								</ul>
+				       </li>
+				       <li><a href="https://git.oschina.net/fumiao/opencms_51opencms" target="_black">源码下载</a></li>
+					   <li><a href="/channel/message">在线留言</a>
+				       </li>
+					   <li><a href="/channel/about">联系我们</a>
+				       </li>
+				       <li><a href="http://www.51opencms.com/admin/index" target="_black">管理平台</a></li>
+                 </ul>
+			</div>
+        </div>
+</div>
+<script type="text/javascript">
+		sfHover = function() {
+		var sfEls = document.getElementById("navMenu").getElementsByTagName("li");
+		for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+		this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+		this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+		}
+		}
+		if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
+<div id="slider1" class="slider">
+			 <div class="conbox">
+					 <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="1000" height="355" /></a></div>
+					 <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="1000" height="355" /></a></div>
+			</div>
+			<div class="switcher">
+					         <a href="#" class="cur">1</a>
+					         <a href="#">2</a>
+			</div>
+</div>
+<div class="mian">
+    <div class="matter">
+        <div class="left">
+        	<div class="a03">
+            	<div class="info">技术分类</div>
+                    <div class="content">
+                   		<ul>
+						                <li><a href="/channel/basic">基础语言</a></li>
+						                <li><a href="/channel/design">设计创作</a></li>
+						                <li><a href="/channel/databases">数据库</a></li>
+						                <li><a href="/channel/operation">系统运维</a></li>
+						                <li><a href="/channel/front">前端开发</a></li>
+						                <li><a href="/channel/server">后端开发</a></li>
+						                <li><a href="/channel/app">移动开发</a></li>
+                        </ul>
+                   </div>
+            </div>
+        </div>
+        <div class="right">
+        	<div class="new">
+            	<div class="info">
+                	<div class="title">技术分享</div>
+                </div>
+                <div class="content1">
+                
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2204.html">深圳村官红与黑：某村主任一次收受贿赂3100万-搜狐新闻</a></h2>
+	                        <p>提起深圳企业，你可能立刻会想到华为、腾讯等明星企业，但有一类企业虽然你关注不多，却不妨碍它在深圳举足轻重的地位。那就是，社区股份合作公司。先通过一张图，让我们感</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2775.html">212121</a></h2>
+	                        <p></p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2415.html">湖南一副市长与科长保持不正当性关系 助其晋升-搜狐新闻</a></h2>
+	                        <p>中新网8月16日电 据湖南省纪委监察厅网站消息，日前，湖南省纪委对20起党员领导干部违反组织人事纪律典型案件查处情况进行了通报。其中，常德市原市委常委</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2725.html">最高法关于深化司法公开促进司法公正情况报告-搜狐新闻</a></h2>
+	                        <p>最高人民法院关于深化司法公开、促进司法公正情况的报告――2016年11月5日在第十二届全国人民代表大会常务委员会第二十四次会议上最高人民法院院长周强全国人民代表</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2726.html">尚福林的38年金融监管之路（附语录）-搜狐新闻</a></h2>
+	                        <p>2月24日上午，银监会召开重要会议，记者从参会人士处获悉，尚福林即将从银监会赴全国政协经济委员会就任，郭树清将接任银监会主席。尚福林2011年10月接替刘明康出</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2727.html">余旭父母赶到天津：执意睡在女儿床上 一夜未眠-搜狐新闻</a></h2>
+	                        <p>余旭曾说过：“我喜欢蓝天，我喜欢飞歼击机的感觉，那种感觉很自由、很酷。”（资料图片）川妹子余旭是我国首批歼击机女飞行员之一。（资料图片）《新闻联播》报道首位歼十</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2728.html">港媒：特朗普为博好感只象征性领取总统年薪一美元-搜狐新闻</a></h2>
+	                        <p>【环球网报道记者任梅子】香港东网11月14日报道称，刚赢得美国总统大选的特朗普接受CBS时事节目《60分钟时事杂志》访问时，开诚布公谈及自己的政见，也表达对各方</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2729.html">郭声琨会见香港特区政府代表团-搜狐新闻</a></h2>
+	                        <p>7月5日，国务委员、公安部部长郭声琨在北京会见了参加内地与香港通报机制磋商的香港特区政府律政司司长袁国强、保安局局长黎栋国等一行。国务委员、公安部部长郭声琨5日</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2730.html">习近平：摆脱贫困-搜狐新闻</a></h2>
+	                        <p>“40多年来，我先后在中国县、市、省、中央工作，扶贫始终是我工作的一个重要内容，我花的精力最多。”在2015减贫与发展高层论坛上，习近平满怀深情地说。摆脱贫困，</p>
+	                    </div>
+				       <div class="one">
+	                    	<h2><a href="/static/three/content/2731.html">缅甸反华媒体大佬被捕 多次发布假消息抹黑中国-搜狐新闻</a></h2>
+	                        <p>【环球时报驻缅甸特约记者李司坤鲁同】11日下午，炒作高官“天价名表门”事件的缅甸《十一新闻》集团总裁丹图昂及总编吴伟漂因涉嫌诽谤，违反缅甸《电信法》，被捕入狱。</p>
+	                    </div>
+                
+                </div>
+                <div class="digg"><span class="disabled"> < </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> > </a></div>
+            </div>
+        </div>
+    </div>	
+
+ </div>
+<div class="bottomwrap">
+	<div  class="bottom">
+		<ul>
+			 
+			<li  style="float: left;margin-left: 20px;"><a style="color: white;" href='http://cms.publiccms.com1' target='_blank' title='企业网站管理系统'>Publiccms</a></li>
+			 
+		</ul>
+	</div>
+	<div class="bottom">
+		<div class="wenzi">
+			youngcms 版权所有 - <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260175299'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1260175299%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			<br /> Copyright © 2016-2022 京ICP备12051136号
+		</div>
+	</div>
+</div>
+<!-- JiaThis Button BEGIN -->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UJian Button BEGIN -->
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide"></script>
+<!-- UJian Button END -->
+</body>
+</html>

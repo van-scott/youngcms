@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.FlowFaceMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.FlowFace" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="role_ids" property="roleIds" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="value" property="value" jdbcType="INTEGER" />
+    <result column="role_names" property="roleNames" jdbcType="VARCHAR" />
+    <result column="flow_id" property="flowId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, description, name, role_ids, sort, value, role_names, flow_id
+  </sql>
+</mapper>

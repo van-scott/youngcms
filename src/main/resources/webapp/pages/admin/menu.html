@@ -1,0 +1,59 @@
+<#include "/admin/inc/ctx.html">
+<div class="accordion" fillSpace="sideBar">
+     <#list menus as menu>
+		<div class="accordionHeader">
+			<h2>${menu.icon!''}${menu.name!'' }</h2>
+		</div>
+		<#if menu.isTree?? && menu.isTree==2>
+		   <div class="accordionContent">
+		        <#if menu.tabId?? && menu.tabId!=''>
+		           <ul id="${menu.tabId }"  type="tree" treeUrl="${menu.treeUrl!'' }" tabUrl="${menu.url!'' }" tabName="${menu.name!'' }" external="${(menu.external)!'false'}" class="ztree" ></ul>
+		        <#else>
+		           <ul id="${menu.id }" type="tree" treeUrl="${menu.treeUrl!'' }" tabUrl="${menu.url!'' }" tabName="${menu.name!'' }" external="${(menu.external)!'false'}" class="ztree"></ul>
+		        </#if>
+					
+		   </div>
+		<#else>
+		<div class="accordionContent">
+					<ul class="m">
+					<#list menu.children as child>
+					    <#if child.tabId?? && child.tabId!=''>
+							<li>
+								<a href="${ctx }${child.url!'' }" target="navTab" rel="${child.tabId }" title="${child.name}" external="${child.external}">
+									<#if child.icon == ''>
+									   <img src="/webapp/static/themes/images/li.gif"/>
+									<#else>
+									   ${child.icon}
+									</#if>
+									${child.name!'' }
+								</a>
+							</li>
+					    <#else>
+						    <li>
+							    <a href="${ctx }${child.url!'' }" target="navTab" rel="${child.id }" title="${child.name}" external="${child.external}">
+							        <#if child.icon == ''>
+									   <img src="/webapp/static/themes/images/li.gif"/>
+									<#else>
+									   ${child.icon}
+									</#if>
+							        ${child.name!'' }
+							    </a>
+						    </li>
+						</#if>
+					</#list>
+					</ul>
+				</div>
+		</#if>
+	</#list>
+</div>
+<script type="text/javascript">
+$(function(){
+	var tree=$("ul[type='tree']");
+	$.each(tree,function(i,val){
+		var id=$(val).attr("id");
+		var treeUrl=$(val).attr("treeUrl");
+		menu.setting.async.url=ctx+treeUrl;
+		$.fn.zTree.init($("#"+id+""), menu.setting);
+	});
+}); 
+</script>

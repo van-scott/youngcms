@@ -1,0 +1,35 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/sysUser/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }">
+		<input type="hidden" name="roleIds" id="roleIds">
+		<div class="pageFormContent" layoutH="45">
+			<p class="nowrap">
+				<label>登录名</label>
+				<input type="text" name="loginName" class="required"  size="30" value="${(pageForm.loginName)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>真实姓名</label>
+				<input type="text" name="realName" class="required"  size="30" value="${(pageForm.realName)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>邮箱</label>
+				<input type="text" name="email" class="required"  size="30" value="${(pageForm.email)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>电话</label>
+				<input type="text" name="phone" class="required"  size="30" value="${(pageForm.phone)! }"/>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:sysUser:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

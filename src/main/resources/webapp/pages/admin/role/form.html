@@ -1,0 +1,25 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/role/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }" /> 
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>角色名称</label> <input type="text" name="name" class="required" size="30" value="${(pageForm.name)! }" />
+			</p>
+
+			<p class="nowrap">
+				<label>备注</label><textarea name="remark" cols="40" rows="4">${(pageForm.remark)! }</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:role:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

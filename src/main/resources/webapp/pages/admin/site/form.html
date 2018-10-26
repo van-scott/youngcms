@@ -1,0 +1,80 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/site/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p class="nowrap">
+				<label>站点名称</label> <input type="text" name="name" size="40" value="${(pageForm.name)! }" />
+			</p>
+			<p class="nowrap">
+				<label>简称</label> <input type="text" name="simpleName" size="40" value="${(pageForm.simpleName)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>SEO标题</label> <input type="text" name="seoTitle" size="40" value="${(pageForm.seoTitle)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>SEO关键字</label> <input type="text" name="seoKeyword" size="40" value="${(pageForm.seoKeyword)! }"/>
+			</p>
+			<p class="nowrap">
+				<label>SEO描述</label> 
+				<textarea rows="4" cols="80">${(pageForm.seoDescription)! }</textarea>
+			</p>
+			<p>
+				<label>域名</label> <input type="text" name="domain" size="30" value="${(pageForm.domain)! }"/>
+			</p>
+			<p>
+				<label>端口</label> <input type="text" name="port" size="30" value="${(pageForm.port)! }"/>
+			</p>
+			<p>
+				<label>资源路径</label> <input type="text" name="sourcePath" size="30" value="${(pageForm.sourcePath)! }"/>
+			</p>
+			<p>
+				<label>访问路径</label> <input type="text" name="path" size="30" value="${(pageForm.path)! }" placeholder="根目录则留空"/>
+			</p>
+			<p>
+				<label>版权</label> <input type="text" name="copyright" size="30" value="${(pageForm.copyright)! }"/>
+			</p>
+			<p>
+				<label>备案号</label> <input type="text" name="recordNumber" size="30" value="${(pageForm.recordNumber)! }"/>
+			</p>
+			<p>
+				<label>LOGO</label> <input type="text" id="logo" name="logo" size="30" value="${(pageForm.logo)! }"/>
+				<input type="file" id="logoFile" name="logoFile" style="display: none;" onchange="upload.ajaxFileUpload('logoFile','logo','dialog');"/>
+				<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('logoFile');"><span>上传</span></a>
+			</p>
+			<p>
+				<label>协议</label>
+				<select name="protocol">
+				   <#list PROTOCOL as  labelValue>
+				      <option value="${(labelValue.value)!}" <#if  pageForm.protocol?? && labelValue.value==pageForm.protocol?c>selected="selected"</#if> >${(labelValue.label)!}</option>
+				   </#list>
+				</select>
+			</p>
+			<p>
+				<label>静态后缀</label>
+				<select name="postfix">
+				   <#list POSTFIX as  labelValue>
+				      <option value="${(labelValue.value)!}" <#if  pageForm.postfix?? && labelValue.value==pageForm.postfix?c>selected="selected"</#if> >${(labelValue.label)!}</option>
+				   </#list>
+				</select>
+			</p>
+			<p>
+				<label>是否主站</label> 
+				<#list YES_OR_NO as  labelValue>
+				    <input type="radio" name="isMaster" value="${labelValue.value }" <#if  pageForm.isMaster?? && labelValue.value==pageForm.isMaster?c>checked="checked"</#if> />${labelValue.label }
+				</#list>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:site:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+

@@ -1,0 +1,91 @@
+<#include "/admin/inc/ctx.html">
+<script type="text/javascript">
+$(function(){
+	var roleIds="";
+	var roleNames="";
+	var checkboxs=$("input[type='checkbox']:checked",$.pdialog.getCurrent());
+	for(var i=0;i<checkboxs.length;i++){
+		roleIds+=checkboxs[i].value+",";
+		roleNames+=$.trim($(checkboxs[i]).parent().text())+",";
+	}
+	 if(roleIds!=""){
+		 roleIds=roleIds.substring(0,roleIds.length-1);	
+		 roleNames=roleNames.substring(0,roleNames.length-1);	
+	}
+	$("#roleIds",$.pdialog.getCurrent()).val(roleIds);
+	$("#roleNames",$.pdialog.getCurrent()).val(roleNames);
+});
+function chooseRole(){
+	var roleIds="";
+	var roleNames="";
+	var checkboxs=$("input[type='checkbox']:checked",$.pdialog.getCurrent());
+	for(var i=0;i<checkboxs.length;i++){
+		roleIds+=checkboxs[i].value+",";
+		roleNames+=$.trim($(checkboxs[i]).parent().text())+",";
+	}
+	if(roleIds!=""){
+		 roleIds=roleIds.substring(0,roleIds.length-1);	
+		 roleNames=roleNames.substring(0,roleNames.length-1);	
+	}
+	$("#roleIds",$.pdialog.getCurrent()).val(roleIds);
+	$("#roleNames",$.pdialog.getCurrent()).val(roleNames);
+}
+</script>
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/flowFace/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogRefresh);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<input type="hidden" name="roleIds" id="roleIds">
+		<input type="hidden" name="roleNames" id="roleNames">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }" />
+			</p>
+			<p  style="display: none;">
+				<label>节点值</label> <input type="text" name="value" value="${(pageForm.value?c)! }" />
+			</p>
+			<p>
+				<label>工作流</label>
+				<select name="flowId">
+				    <#list flowList as labelValue>
+				         <option value="${labelValue.id }" <#if pageForm.flowId?? && labelValue.id==pageForm.flowId>selected="selected"</#if>>${labelValue.name }</option>
+				    </#list>
+				</select>
+			</p>
+			<p style="display: none;">
+				<label>排序</label> <input type="text" name="sort"  value="${(pageForm.sort?c)! }"/>
+			</p>
+			<p>
+				<label>角色</label>
+				 <#list roleList  as role>
+				   <span>
+				        <#assign YN=0>
+				        <#list flowFaceRoleList as flowFaceRole>
+							<#if flowFaceRole?? && flowFaceRole==role.id?c>
+							   <#assign YN=1>
+							</#if>
+					    </#list>
+					    <#if YN==1>
+					       <input type="checkbox" checked="checked" value="${role.id }" onclick="chooseRole(this)" />${role.name }
+					    <#else>
+					       <input type="checkbox" value="${role.id }" onclick="chooseRole(this)" />${role.name }
+					    </#if>
+				   </span>
+				 </#list>
+			</p>
+			<p  class="nowrap">
+				<label>描述</label>
+				<textarea name="description" cols="40" rows="2">${(pageForm.description)! }</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:flowFace:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esen.youngcms.dao.AdvertMapper">
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.Advert">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="click_num" jdbcType="VARCHAR" property="clickNum" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="advert_position_id" jdbcType="INTEGER" property="advertPositionId" />
+    <result column="advert_position_name" jdbcType="VARCHAR" property="advertPositionName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, click_num, create_time, end_time, img_url, start_time, title, url, advert_position_id
+  </sql>
+  
+</mapper>

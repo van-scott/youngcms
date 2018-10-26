@@ -1,0 +1,67 @@
+<script type="text/javascript">
+var setting = {
+	async : {
+		enable : true,
+		url : path + "/admin/channel/simpleNodes",
+		autoParam : [ "id=parent_channel_id" ]
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback : {
+		onClick : onClick
+	}
+};
+function onClick(event, treeId, treeNode, clickFlag) {
+	var channelId=treeNode.id;
+	var inputs=$(".tablelist tbody input:checked");
+	var ids="";
+	for(var i=0;i<inputs.length;i++){
+		ids+=$(inputs[i]).val()+",";
+	}
+	 $.ajax({  
+        type : "POST",
+        url : path+"/admin/contentReptile/toContent",
+        data : {"ids":ids,"channelId":channelId},
+        dataType: 'json',
+        success : function(result) {
+        	if(result.success){
+        		 document.listForm.submit();
+        	}else{
+        		 document.layer.msg(result.message,{
+        		    icon: 2,      //图标
+        		    shade: [0],	  //是否遮罩
+        		    offset: 'rb', //右下角弹出
+        		    time: 2000,   //2秒后自动关闭
+        		    shift: 2,     //弹出方式
+        		    skin: 'layer-ext-moon' 
+        		})
+        	}
+        }  
+    }); 
+	hideMenu();
+}
+function showMenu(wel) {
+	var cityObj = $(wel);
+	var cityOffset = $(wel).offset();
+	$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight()-10 + "px"}).slideDown("fast");
+	$("body").bind("mousedown", onBodyDown);
+}
+function hideMenu() {
+	$("#menuContent").fadeOut("fast");
+	$("body").unbind("mousedown", onBodyDown);
+}
+function onBodyDown(event) {
+	if (!(event.target.id == "menuBtn" || event.target.id == "pName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+		hideMenu();
+	}
+}
+$(document).ready(function(){
+	$.fn.zTree.init($("#treeDemo"), setting);
+});
+</script>
+<div id="menuContent">
+	    <ul id="treeDemo" class="ztree ztreeSty"></ul>
+ </div>

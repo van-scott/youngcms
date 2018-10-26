@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>youngcms-免费的JAVA CMS-内容管理系统-${channel.name}</title>
+<link href="${path}/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/index.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/tab.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${path}/js/jquery.js"></script>
+<script type="text/javascript" src="${path}/js/jquery.Xslider.js"></script>
+<script type="text/javascript" src="${path}/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">
+function setTab(m,n){
+ var tli=document.getElementById("menu"+m).getElementsByTagName("li");
+ var mli=document.getElementById("piece"+m).getElementsByTagName("ul");
+ for(i=0;i<tli.length;i++){
+  tli[i].className=i==n?"hover":"";
+  mli[i].style.display=i==n?"block":"none";
+ }
+}
+$(function(){
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	jQuery(".focusBox").hover(function(){ jQuery(this).find(".prev,.next").stop(true,true).fadeTo("show",0.2) },function(){ jQuery(this).find(".prev,.next").fadeOut() });
+	jQuery(".focusBox").slide({ mainCell:".pic",effect:"fold", autoPlay:true, delayTime:100, trigger:"click"});//banner图
+});
+</script>
+</head>
+
+<body>
+	 <#include "../include/header.html"/>
+     
+    <!--  <div class="wrap_banner">
+     	<div class="banner">
+     	<@_advert_list advertPositionId=2 size=1;averts,advertPosition>
+		   <#list averts as avert>
+		      <img src="${avert.imgUrl}" width="100%" height="439" />
+		   </#list>
+		</@_advert_list>
+     	</div>
+     </div> -->
+     
+    <div class="banner">
+		<@_advert_list advertPositionId=2 size=6;averts,advertPosition>
+			<div class="focusBox">
+				<ul class="pic">
+					<#list averts as avert>
+					   <li><a href="#"><img src="${avert.imgUrl}" width="100%" height="439" /></a></li>
+					</#list>
+				</ul>
+				<a class="prev" href="javascript:void(0)"></a> <a class="next" href="javascript:void(0)"></a>
+				<ul class="hd">
+					<#list 1..(averts?size) as i>
+					   <li></li> 
+					</#list>
+				</ul>
+			</div>
+		</@_advert_list>
+	</div>
+      
+     <div class="mian">
+            <div class="matter1">
+            	<div class="left">
+                	<div class="info">最新上传</div>
+                    <div id="slider3" class="slider">
+           <@_content_list model=6 channelCode='fouce' size=6;contents,channel>
+				<div class="conbox">
+			          <#list contents as content>
+			              <div><a href="#" title=""><img src="${content.imgUrl}" width="632" height="210" /></a></div>
+			          </#list>
+				</div>
+				<div class="switcher">
+					<#list 1..(contents?size) as i>
+					    <#if i==1>
+					         <a href="#" class="cur">${i}</a>
+					    <#else>
+					         <a href="#">${i}</a>
+					    </#if>
+			        </#list>
+				</div>
+			 </@_content_list>
+		</div>
+                </div>
+                <@_content_list model=4 channelCode='it_news' size=7 fields="create_time" sort="desc";contents,channel>
+                    <div class="right">
+                    <div class="info">${channel.name}</div>
+                    <div class="content">
+                    	 <ul>
+                             <#list contents as content>
+								 <li><a href="${path}/content/${content.id?c}.html">${content.title}...</a></li>
+							 </#list>
+                        </ul>
+                    </div>
+                  </div>
+				</@_content_list> 
+            </div>
+            
+		<div style="height:10px;"></div>
+            
+            <div class="ad2">
+	            <@_advert_list advertPositionId=6 size=1;averts,advertPosition>
+				   <#list averts as avert>
+				      <a href="#"><img src="${avert.imgUrl}" width="1000" height="69" /></a>
+				   </#list>
+				</@_advert_list>
+            </div>
+
+            <div class="matter5">
+            	<@_content_list model=4 channelCode='front' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+                
+                <@_content_list model=4 channelCode='server' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info1">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+                
+                <@_content_list model=4 channelCode='app' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info2">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+            </div>       
+
+            <div style="height:10px;"></div>
+            <div class="ad2">
+               <@_advert_list advertPositionId=7 size=1;averts,advertPosition>
+				   <#list averts as avert>
+				      <a href="#"><img src="${avert.imgUrl}" width="1000" height="69" /></a>
+				   </#list>
+				</@_advert_list>
+            </div>
+
+			<div class="matter5">
+            	<@_content_list model=4 channelCode='basic' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+                
+                <@_content_list model=4 channelCode='databases' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info1">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+                
+                <@_content_list model=4 channelCode='design' size=8 fields="create_time" sort="desc";contents,channel>
+					<div class="news">
+                	<div class="info2">
+                        <div class="title">${channel.name}</div>
+                        <div class="more"><a href="${path}/channel/${channel.code}">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+                    	     <#list contents as content>
+								 <li>
+								   <div class="time">${content.createTime?substring(0,10)}</div>
+								   <a href="${path}/content/${content.id?c}.html" class="newslist_time" title="#">${content.title}...</a>
+								 </li>
+							 </#list>
+                          </ul>
+                    </div>
+                    </div>
+				</@_content_list> 
+            </div>   
+            
+            <div style="height:10px;"></div>
+            
+            <div id="tabs0">
+			<div class="hdk">
+				<ul class="menu0" id="menu0">
+					<li onClick="setTab(0,0)" class="hover">娱乐图集</li>
+					<li onClick="setTab(0,1)">文化校园</li>
+				</ul>
+			</div>
+			<div class="piece" id="piece0">
+				<ul style="display: block;">
+					<li>
+					 <@_content_list model=6 channelCode='yule' size=6;contents,channel>
+						<div class="matter2">
+							<div class="content">
+								<div class="left">
+									<div class="tp1">
+										<img src="${channel.imgUrl}" width="210" height="276" />
+									</div>
+									<div class="biaoti">
+										<strong>拍摄主题：${channel.name}</strong><br />拍摄时间：2013-5-15
+									</div>
+								</div>
+								<div class="right">
+									<#list contents as content>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="${content.imgUrl}" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">${content.title}</a>
+										</div>
+									</div>
+									</#list>
+								</div>
+							</div>
+						</div> 
+					 </@_content_list>
+				  </li>
+				</ul>
+				<ul style="display: none;">
+					<li>
+					 <@_content_list model=6 channelCode='wenhua' size=6;contents,channel>
+						<div class="matter2">
+							<div class="content">
+								<div class="left">
+									<div class="tp1">
+										<img src="${channel.imgUrl}" width="210" height="276" />
+									</div>
+									<div class="biaoti">
+										<strong>拍摄主题：${channel.name}</strong><br />拍摄时间：2013-5-15
+									</div>
+								</div>
+								<div class="right">
+									<#list contents as content>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="${content.imgUrl}" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">${content.title}</a>
+										</div>
+									</div>
+									</#list>
+								</div>
+							</div>
+						</div> 
+					 </@_content_list>
+				  </li>
+				</ul>
+				<ul>
+			</div>
+		</div>  
+</div>
+<#include "../include/footer.html"/>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/dictType/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>类型名称</label> <input type="text" name="chName" value="${(pageForm.chName)! }" />
+			</p>
+			<p>
+				<label>英文名称</label> <input type="text" name="enName" value="${(pageForm.enName)! }"/>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:dictType:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+

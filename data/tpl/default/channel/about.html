@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>openCms-免费的JAVA CMS(内容管理系统)</title>
+<meta name="description" content="网站描述，一般显示在搜索引擎搜索结果中的描述文字，用于介绍网站，吸引浏览者点击。" />
+<meta name="keywords" content="网站关键词" />
+<meta name="generator" content="MetInfo 5.1.7" />
+<link href="favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="${path}/static/default/css/metinfo.css" />
+<script src="${path}/static/default/js/jQuery1.7.2.js" type="text/javascript"></script>
+<script src="${path}/static/default/js/ch.js" type="text/javascript"></script>
+</head>
+<body>
+    <#include "../include/header.html"/>
+	<div class="inner met_flash"><div class="flash">
+	<@advertList advertPositionId=5 size=1;averts,advertPosition>
+	   <#list averts as avert>
+	      <a href='#' target='_blank' title='企业网站管理系统'><img src='${avert.imgUrl}' width='980' alt='企业网站管理系统' height='90'></a>
+	   </#list>
+   </@advertList>
+</div></div>
+
+
+<div class="sidebar inner">
+    <div class="sb_nav">
+
+		<h3 class='title line myCorner' data-corner='top 5px'>联系方式</h3>
+			<div class="active editor">
+			    <div>网 &nbsp;址：www.51opencms.cn</div>
+				<div>电 &nbsp;话：暂时保密</div>
+				<div>Q&nbsp;Q：3019243</div>
+				<div>Q&nbsp;群：<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=95955e57f0b64f9e7c547d083279b8f281572113ae632dcf989d40b21379af6c"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="openCms-开源JAVA CMS" title="openCms-开源JAVA CMS"></a></div>
+				<div>Email：fm0310@163.com</div>
+				
+				<div class="clear"></div>
+			</div>
+		</div>
+    <div class="sb_box">
+	    <h3 class="title">
+						<div class="position">当前位置：<a href="http://demo.metinfo.cn/" title="网站首页">网站首页</a> &gt; <a href=../about/show.php?lang=cn&id=19 >关于我们</a> > <a href=../about/show.php?lang=cn&id=19 >公司简介</a></div>
+			<span>公司简介</span>
+		</h3>
+		<div class="clear"></div>
+
+        <div class="editor active" id="showtext">
+		     <@contentView contentId=2284;contentDetail>
+					<div>
+						<img alt="" src="${contentDetail.imgUrl}" style="margin: 8px; width: 196px; float: left; height: 209px;" />
+					</div>
+		            ${contentDetail.contentText.text}
+		     </@contentView>
+		<div class="clear"></div>
+		</div>
+    </div>
+    <div class="clear"></div>
+</div>
+<#include "../include/footer.html"/>
+</body>
+</html>

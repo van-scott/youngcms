@@ -1,0 +1,137 @@
+<#include "/admin/inc/ctx.html">
+<script type="text/javascript">
+	var channelForm={
+			chooseModel:function(_this){
+				var b=$(_this).is(':checked');
+				var modelName=$(_this).parent().text();
+				var modelId=$(_this).val();
+				if(b){
+					var str="<p id='model"+modelId+"'>"+
+				    "<label>"+modelName+"模版</label>"+
+				    "<input type='hidden' name='model' value='"+modelId+"' size='30'/>"+
+				    "<input type='text' name='template' class='required' size='30'/>"+
+				    "<a class='buttonActive' title='选择模版' target='dialog' rel='channel_form_dialog'  href='${ctx}/admin/channel/chooseTemplate?modelId="+modelId+"' mask=true width='280' height='400'><span>选择</span></a>"+
+			        "</p>";
+					$("#templateList",$.pdialog.getCurrent()).append(str);
+					$("#templateList",$.pdialog.getCurrent()).initUI();
+				}else{
+					$("#model"+modelId+"",$.pdialog.getCurrent()).remove();
+				}
+			}
+	}
+</script>
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/channel/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }" />
+		<div class="pageFormContent" layoutH="56">
+			<fieldset>
+				<legend>基本信息</legend>
+				<p>
+					<label>父节点名称</label> 
+					 <input type="hidden" name="pId" value="${(pageForm.pId)! }" size="30" readonly="readonly" />
+					<input type="text" name="pName" value="${(pageForm.pName)! }" size="30" readonly="readonly" />
+				</p>
+				<p>
+					<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }"  class="required" size="30" />
+				</p>
+				<p>
+					<label>缩略图</label>
+					<input type="text" id="imgUrl" name="imgUrl" value="${(pageForm.imgUrl)! }"/>
+					<input type="file" id="imgUrlFile" name="imgUrlFile" style="display: none;" onchange="upload.ajaxFileUpload('imgUrlFile','imgUrl','dialog');"/>
+					<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('imgUrlFile');"><span>上传</span></a>
+				</p>
+				<p>
+					<label>是否导航</label> 
+					是<input type="radio" name="isNav" value="1" <#if pageForm.isNav==1>checked="checked"</#if> /> 
+					否<input type="radio" name="isNav" value="2" <#if pageForm.isNav==2 >checked="checked"</#if> />
+				</p>
+				<p>
+					<label>页面标示</label> <input type="text" name="code" value="${(pageForm.code)! }" size="30" />
+				</p>
+				<p>
+					<label>排序</label> <input type="text" name="sort" value="${(pageForm.sort)! }" size="30" />
+				</p>
+				<p>
+					<label>是否外链</label> 
+					是<input type="radio" name="isOut" value="1" <#if pageForm.isOut==1 >checked="checked"</#if> /> 
+					否<input type="radio" name="isOut" value="2" <#if pageForm.isOut==2 >checked="checked"</#if> />
+				</p>
+				<p>
+					<label>链接</label> <input type="text" name="outUrl" value="${(pageForm.outUrl)! }" size="30" />
+				</p>
+				<p>
+					<label>模型</label>
+					<#list modelList as model>
+						<span>
+						<#assign YN = 0>
+						<#list channelModelList as channelModel>
+						    <#if channelModel.modelId == model.id >
+						       <#assign YN = 1>
+						    </#if>
+						</#list>
+						<#if YN==1>
+						   <input type="checkbox" checked="checked" value="${model.id }" onclick="channelForm.chooseModel(this)" />${model.name }
+						<#else>
+						   <input type="checkbox" value="${model.id }" onclick="channelForm.chooseModel(this)" />${model.name }
+						</#if>
+						</span>
+					</#list>
+				</p>
+				<p>
+				<label>工作流</label>
+				<select name="flowId">
+				    <option value="">---请选择---</option>
+				    <#list flowList as labelValue>
+				         <option value="${labelValue.id }" <#if pageForm.flowId?? && labelValue.id==pageForm.flowId>selected="selected"</#if>>${labelValue.name }</option>
+				    </#list>
+				</select>
+			</p>
+			</fieldset>
+			<fieldset id="templateList">
+				<legend>模版信息</legend>
+				<#if pageForm.id??>
+					<#list channelTemplateList as channelTemplate>
+						<p id="model${(channelTemplate.modelId)!}">
+							<label>${(channelTemplate.modelName)!'栏目页'}模板</label>
+							<input type="hidden"  name="model" value="${(channelTemplate.modelId)!}" size="30"/>
+							<input type="text"  name="template" class="required" value="${(channelTemplate.template)!}"  size="30"/>
+							<a class="buttonActive" title="选择模版" target="dialog" rel="channel_form_dialog"  href="${ctx}/admin/channel/chooseTemplate?modelId=${(channelTemplate.modelId)!}" mask=true width="280" height="400"><span>选择</span></a>
+						</p>
+					</#list>
+				<#else>
+					<p id="model0">
+						<label>栏目页模板</label>
+						<input type="hidden"  name="model" value="0" size="30"/>
+						<input type="text"  name="template" class="required"  size="30"/>
+						<a class="buttonActive" title="选择模版" target="dialog" rel="channel_form_dialog"  href="${ctx}/admin/channel/chooseTemplate?modelId=0" mask=true width="280" height="400"><span>选择</span></a>
+					</p>
+				</#if>
+			</fieldset>
+			<fieldset>
+				<legend>SEO信息</legend>
+				<p>
+					<label>mate标题</label> <input type="text" name="mateTitle" value="${(pageForm.mateTitle)! }" size="30" />
+				</p>
+				<p>
+					<label>mate关键字</label> <input type="text" name="mateKeywords" value="${(pageForm.mateKeywords)! }" size="30" />
+				</p>
+				<dl class="nowrap">
+					<label>mate描述</label>
+					<textarea name="mateDescription" cols="80" rows="4">${(pageForm.mateDescription)! }</textarea>
+				</dl>
+			</fieldset>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:channel:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+

@@ -1,0 +1,85 @@
+<#include "/admin/inc/ctx.html">
+<script type="text/javascript">
+$(function(){
+	var roleIds="";
+	var checkboxs=$("input[type='checkbox']:checked");
+	for(var i=0;i<checkboxs.length;i++){
+		roleIds+=checkboxs[i].value+",";
+	}
+	 if(roleIds!=""){
+		 roleIds=roleIds.substring(0,roleIds.length-1);	
+	}
+	$("#roleIds").val(roleIds);
+});
+function chooseRole(){
+	var roleIds="";
+	var checkboxs=$("input[type='checkbox']:checked");
+	for(var i=0;i<checkboxs.length;i++){
+		roleIds+=checkboxs[i].value+",";
+	}
+	 if(roleIds!=""){
+		 roleIds=roleIds.substring(0,roleIds.length-1);	
+	    }
+		$("#roleIds").val(roleIds);
+}
+</script>
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/sysUser/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }">
+		<input type="hidden" name="roleIds" id="roleIds">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>登录名</label>
+				<input type="text" name="loginName" class="required"  size="30" value="${(pageForm.loginName)! }"/>
+			</p>
+			<p>
+				<label>真实姓名</label>
+				<input type="text" name="realName" class="required"  size="30" value="${(pageForm.realName)! }"/>
+			</p>
+			<p>
+				<label>邮箱</label>
+				<input type="text" name="email" class="required"  size="30" value="${(pageForm.email)! }"/>
+			</p>
+			<p>
+				<label>电话</label>
+				<input type="text" name="phone" class="required"  size="30" value="${(pageForm.phone)! }"/>
+			</p>
+			<p>
+				<label>密码</label>
+				<input type="password"   name="dwz_orgLookup.orgNum" class="textInput">
+			</p>
+			<p>
+				<label>重复密码</label>
+				<input type="password" name="code"  alt="请输入数字"/>
+			</p>
+			<p>
+				<label>角色</label>
+				 <#list roleList  as role>
+				   <span>
+				        <#assign YN=0>
+				        <#list userRoleList as sysUserRole>
+							<#if sysUserRole.roleId?? && sysUserRole.roleId==role.id>
+							   <#assign YN=1>
+							</#if>
+					    </#list>
+					    <#if YN==1>
+					       <input type="checkbox" checked="checked" value="${role.id }" onclick="chooseRole(this)" />${role.name }
+					    <#else>
+					       <input type="checkbox" value="${role.id }" onclick="chooseRole(this)" />${role.name }
+					    </#if>
+				   </span>
+				 </#list>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:sysUser:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

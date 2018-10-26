@@ -1,0 +1,111 @@
+<#include "/admin/inc/ctx.html">
+<link href="${ctx }/webapp/static/lib/treetable/jquery.treetable.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="${ctx }/webapp/static/lib/treetable/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="${ctx }/webapp/static/lib/treetable/jquery.treetable.js" type="text/javascript"> </script>
+<script type="text/javascript">
+$(function () {
+    var option = {
+    		theme:'vsStyle',
+    		column:2,
+    		expandable:true
+    };
+    $('#channelTable',navTab.getCurrentPanel()).treetable(option);//根据表格id来初始化
+    //$("#channelTable",navTab.getCurrentPanel()).treetable("expandAll");
+});
+</script>
+<style>
+#channelTable th{border-top: 1px solid #B8D0D6;font-weight: bolder;}
+#channelTable th,#channelTable td{border-left: solid 1px #E7E7E7;border-right: 1px solid #E7E7E7;border-bottom: 1px solid #E7E7E7;line-height: 22px;background: white;}
+</style>
+
+<#macro _channel_table records>
+ <#list records as child>
+	<tr data-tt-id='${child.id}' data-tt-parent-id='${child.pId}' target="id" rel="${child.id }">
+		<td><input type="checkbox" name="ids" value="${child.id }" /></td>
+		<td>${child.id }</td>
+		<td>${child.name }</td>
+		<td>${child.code }</td>
+		<td>
+		    <#if child.isNav==1>
+			     是
+		   <#else>
+			    否
+		   </#if>
+		</td>
+		<td>${child.sort }</td>
+		<td align="center">
+		    <@shiro.hasPermission name="admin:channel:form">
+		    <a title="添加下级" target="dialog" width="800" height="400" href="${ctx}/admin/channel/form?pId=${child.id }" class="addButton">添加下级</a>
+			 </@shiro.hasPermission>
+			<@shiro.hasPermission name="admin:channel:delete">
+			<a title="删除" target="ajaxTodo" callback="ajaxTodoDone" href="${ctx }/admin/channel/delete?id=${child.id}" class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a> 
+			 </@shiro.hasPermission>
+			<@shiro.hasPermission name="admin:channel:form">
+			<a title="编辑" target="dialog"  width="800" height="400" href="${ctx}/admin/channel/form?id=${child.id }"  class="editButton"><i class="fa fa-file-text-o"></i>&nbsp;编辑</a>
+		     </@shiro.hasPermission>
+		</td>
+	</tr>
+    <@_channel_table records=child.children />
+ </#list> 
+</#macro>
+
+<form id="pagerForm" method="post" action="${ctx}/admin/channel/treePage">
+	<input type="hidden" name="pageNum" value="1" />
+</form>
+<div class="pageContent">
+<div class="panelBar" style="margin-top: 1px;">
+		<ul class="toolBar">
+		    <@shiro.hasPermission name="admin:channel:form">
+		    <li><a href="${ctx}/admin/channel/form?pId=1" target="dialog" width="800" height="400"><i class="fa fa-plus"></i>添加</a></li>
+			</@shiro.hasPermission>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<div layoutH="0" style="margin-top: 1px;">
+		<table id="channelTable" style="margin-top: 0;">
+			<thead>
+				<tr>
+				    <th width="2%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				    <th width="3%">编号</th>
+					<th width="10%">名称</th>
+					<th width="5%">页面标识</th>
+					<th width="5%">是否导航</th>	
+					<th width="5%">排序</th>
+					<th width="8%">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pageData as bean> 
+				        <#if bean.pId?? && bean.pId==1>
+				        <tr data-tt-id='${bean.id}' target="id" rel="${bean.id }">
+							<td><input type="checkbox" name="ids" value="${bean.id }" /></td>
+							<td>${bean.id }</td>
+							<td>${bean.name }</td>
+							<td>${bean.code }</td>
+							<td>
+							 <#if bean.isNav==1>
+							             是
+							 <#else>
+							            否
+							 </#if>
+							</td>
+							<td>${bean.sort }</td>
+							<td align="center">
+							    <@shiro.hasPermission name="admin:channel:form">
+							    <a title="添加下级" target="dialog" width="800" height="400" href="${ctx}/admin/channel/form?pId=${bean.id }" class="addButton">添加下级</a>
+								</@shiro.hasPermission>
+								<@shiro.hasPermission name="admin:channel:delete">
+								<a title="删除" target="ajaxTodo" callback="ajaxTodoDone" href="${ctx }/admin/channel/delete?id=${bean.id}"  class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a> 
+								</@shiro.hasPermission>
+								<@shiro.hasPermission name="admin:channel:form">
+								<a title="编辑" target="dialog" rel="channel_treePage_dialog" width="800" height="400" href="${ctx}/admin/channel/form?id=${bean.id }"  class="editButton"><i class="fa fa-file-text-o"></i>&nbsp;编辑</a>
+							    </@shiro.hasPermission>
+							</td>
+						</tr>
+				          <@_channel_table records=bean.children />
+						</#if>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+</div>

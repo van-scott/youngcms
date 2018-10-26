@@ -1,0 +1,60 @@
+<style type="text/css">
+#menuContent{position: absolute;z-index: 1000;left: 170px;top: 70px;display: block;display: none;background: #f2f2f2;border: 1px solid #ccc;}
+.ztreeSty{margin-top:0;overflow-y:scroll; width:180px;height:140px;}
+</style>
+<script type="text/javascript">
+var channelTemplate={
+		path:"",
+		isparent:false,
+		setting:{
+			async : {
+				enable : true,
+				url :ctx+"/admin/template/fileTree",
+				autoParam : [ "id=parent_channel_id" ]
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback:{
+				onClick:function(event, treeId, treeNode, clickFlag){
+					isparent=treeNode.isParent;
+					path=treeNode.relativePath;
+				}
+	        }
+		},
+		sub:function(){
+			if(!isparent){
+				var modelId='${(modelId)!}';
+				var dialogs = $(">.dialog", "body");
+				$(dialogs[0]).find("#model"+modelId+" input[type='text']").val(path);
+				$.pdialog.closeCurrent();
+				$.pdialog.switchDialog($(dialogs[0])); /*此方法很重要，目的是让前一个dialog被选中*/
+			}else{
+				alertMsg.error("请选择正确的模板文件");
+			}
+		},
+		close:function(){
+			var dialogs = $(">.dialog", "body");
+			$.pdialog.closeCurrent();
+			$.pdialog.switchDialog($(dialogs[0])); /*此方法很重要，目的是让前一个dialog被选中*/
+		}
+}
+$(document).ready(function(){
+	$.fn.zTree.init($("#treeDiv",$.pdialog.getCurrent()), channelTemplate.setting);
+});
+</script>
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="56">
+			<ul id="treeDiv" class="ztree"></ul> 
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="channelTemplate.sub()">确定</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" onclick="channelTemplate.close()">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+</div>

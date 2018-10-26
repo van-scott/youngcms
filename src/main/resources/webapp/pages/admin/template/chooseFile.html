@@ -1,0 +1,59 @@
+<style type="text/css">
+#menuContent{position: absolute;z-index: 1000;left: 170px;top: 70px;display: block;display: none;background: #f2f2f2;border: 1px solid #ccc;}
+.ztreeSty{margin-top:0;overflow-y:scroll; width:180px;height:140px;}
+</style>
+<script type="text/javascript">
+var chooseFile={
+		path:"",
+		setting:{
+			async : {
+				enable : true,
+				url :ctx+"/admin/template/fileTree",
+				autoParam : [ "id=parent_channel_id" ]
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback:{
+				onClick:function(event, treeId, treeNode, clickFlag){
+					path=treeNode.relativePath;
+				}
+	        }
+		},
+		sub:function(){
+			var type=$("input[type='radio']:checked",$.pdialog.getCurrent()).val();
+			var s="";
+			if(type==1){
+				s+="<#include \""+path+"\"/>"
+			}else{
+				s+="<#import \""+path+"\" as t/>"
+			}
+			var dialogs = $(">.dialog", "body");
+			$("#codeContent",navTab.getCurrentPanel()).insertAtCaret(s);
+			$.pdialog.closeCurrent();
+		}
+}
+$(document).ready(function(){
+	$.fn.zTree.init($("#treeDiv",$.pdialog.getCurrent()), chooseFile.setting);
+});
+</script>
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="56">
+		    <div style="height: 24px;border-bottom: 1px solid #99BBE8">
+				<label>引入方式</label>
+				<input type="radio"  name="type" value="1" checked="checked" />include
+				<input type="radio"  name="type" value="2"/>import
+			</div>
+			<ul id="treeDiv" class="ztree"></ul> 
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="chooseFile.sub()">确定</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+</div>

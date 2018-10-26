@@ -1,0 +1,35 @@
+<#include "/admin/inc/ctx.html">
+<script type="text/javascript">
+var statix=new Object();
+statix.onClick=function(event, treeId, treeNode, clickFlag){
+	var url=encodeURI(ctx+"/admin/static/show?path="+treeNode.path)
+	$("#jbsxBox", navTab.getCurrentPanel()).loadUrl(url,{},
+			function() {
+			 $("#jbsxBox", navTab.getCurrentPanel()).find("[layoutH]").layoutH()
+		    })
+};
+statix.setting = {
+	async: {
+		enable: true,
+		url:ctx+"/admin/static/fileTree"
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback: {
+		onClick: statix.onClick
+	}
+};
+$(function() {
+	$.fn.zTree.init($("#treeDiv", navTab.getCurrentPanel()),statix.setting);
+});
+</script>
+    <div class="pageContent">
+		<div layoutH="0" style="float: left; overflow: auto; width: 180px; border-right: solid 1px #CCC; line-height: 21px;">
+			<ul id="treeDiv" class="ztree"></ul> 
+		</div>
+		<div layoutH="0" id="jbsxBox" class="unitBox" >
+		</div>
+	</div>

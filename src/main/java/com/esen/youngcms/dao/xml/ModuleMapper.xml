@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.Module" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="tab_id" property="tabId" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="module_type" property="moduleType" jdbcType="INTEGER" />
+    <result column="is_tree" property="isTree" jdbcType="INTEGER" />
+    <result column="tree_url" property="treeUrl" jdbcType="VARCHAR" />
+    <result column="authorize" property="authorize" jdbcType="VARCHAR" />
+    <result column="external" property="external" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, p_id, sort, tab_id, href, module_type,icon,is_tree,tree_url,authorize,external
+  </sql>
+  
+</mapper>

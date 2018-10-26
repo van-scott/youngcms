@@ -1,0 +1,6 @@
+@charset "utf-8";
+.addButton,.editButton,.delButton{padding:0 5px 0 5px;color: blue;border-right:1px solid #868686;}
+.addButton a,.editButton a,.delButton a{text-decoration: none;}
+.addButton a:HOVER,.editButton a:HOVER,.delButton a:HOVER{text-decoration: none;}
+
+

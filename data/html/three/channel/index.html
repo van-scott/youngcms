@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>youngcms-免费的JAVA CMS-内容管理系统-网站首页</title>
+<link href="/css/public.css" rel="stylesheet" type="text/css" />
+<link href="/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/css/tab.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.Xslider.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">
+function setTab(m,n){
+ var tli=document.getElementById("menu"+m).getElementsByTagName("li");
+ var mli=document.getElementById("piece"+m).getElementsByTagName("ul");
+ for(i=0;i<tli.length;i++){
+  tli[i].className=i==n?"hover":"";
+  mli[i].style.display=i==n?"block":"none";
+ }
+}
+$(function(){
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	jQuery(".focusBox").hover(function(){ jQuery(this).find(".prev,.next").stop(true,true).fadeTo("show",0.2) },function(){ jQuery(this).find(".prev,.next").fadeOut() });
+	jQuery(".focusBox").slide({ mainCell:".pic",effect:"fold", autoPlay:true, delayTime:100, trigger:"click"});//banner图
+});
+</script>
+</head>
+
+<body>
+<div class="wrap_top">
+    	<div class="top">
+        	<div class="logo"><a href="#"><img src="/static/three/images/logo.png" width="200" height="74" /></a></div>
+            <div id="navMenu">
+                <ul class="menu1">
+					   <li><a href="/channel/index">网站首页</a>
+				       </li>
+				       <li><a href="" target="_black">技术分享</a></li>
+					   <li><a href="/channel/photo">精彩图库</a>
+						        <ul>
+										 <li><a href="/channel/yule">娱乐图集</a></li>
+										 <li><a href="/channel/wenhua">文化校园</a></li>
+										 <li><a href="/channel/fouce">焦点图片</a></li>
+										 <li><a href="/channel/zuguo">祖国之美</a></li>
+								</ul>
+				       </li>
+					   <li><a href="/channel/news">新闻资讯</a>
+						        <ul>
+										 <li><a href="/channel/it_news">IT资讯</a></li>
+										 <li><a href="/channel/sys_news">系统介绍</a></li>
+								</ul>
+				       </li>
+				       <li><a href="https://git.oschina.net/fumiao/opencms_51opencms" target="_black">源码下载</a></li>
+					   <li><a href="/channel/message">在线留言</a>
+				       </li>
+					   <li><a href="/channel/about">联系我们</a>
+				       </li>
+				       <li><a href="http://www.51opencms.com/admin/index" target="_black">管理平台</a></li>
+                 </ul>
+			</div>
+        </div>
+</div>
+<script type="text/javascript">
+		sfHover = function() {
+		var sfEls = document.getElementById("navMenu").getElementsByTagName("li");
+		for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+		this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+		this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+		}
+		}
+		if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
+     
+    <!--  <div class="wrap_banner">
+     	<div class="banner">
+		      <img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="100%" height="439" />
+		      <img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="100%" height="439" />
+     	</div>
+     </div> -->
+     
+    <div class="banner">
+			<div class="focusBox">
+				<ul class="pic">
+					   <li><a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="100%" height="439" /></a></li>
+					   <li><a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="100%" height="439" /></a></li>
+				</ul>
+				<a class="prev" href="javascript:void(0)"></a> <a class="next" href="javascript:void(0)"></a>
+				<ul class="hd">
+					   <li></li> 
+					   <li></li> 
+				</ul>
+			</div>
+	</div>
+      
+     <div class="mian">
+            <div class="matter1">
+            	<div class="left">
+                	<div class="info">最新上传</div>
+                    <div id="slider3" class="slider">
+				<div class="conbox">
+			              <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473224858120.jpg" width="632" height="210" /></a></div>
+			              <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473224881633.jpg" width="632" height="210" /></a></div>
+			              <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473244866720.jpg" width="632" height="210" /></a></div>
+			              <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473244923839.jpg" width="632" height="210" /></a></div>
+				</div>
+				<div class="switcher">
+					         <a href="#" class="cur">1</a>
+					         <a href="#">2</a>
+					         <a href="#">3</a>
+					         <a href="#">4</a>
+				</div>
+		</div>
+                </div>
+                    <div class="right">
+                    <div class="info">IT资讯</div>
+                    <div class="content">
+                    	 <ul>
+								 <li><a href="/content/2703.html">最高法关于深化司法公开促进司法公正情况报告-搜狐新闻...</a></li>
+								 <li><a href="/content/2704.html">党报再谈楼市：政策要让炒房者知难而退-搜狐新闻...</a></li>
+								 <li><a href="/content/2705.html">余旭父母赶到天津：执意睡在女儿床上 一夜未眠-搜狐新闻...</a></li>
+								 <li><a href="/content/2706.html">港媒：特朗普为博好感只象征性领取总统年薪一美元-搜狐新闻...</a></li>
+								 <li><a href="/content/2707.html">郭声琨会见香港特区政府代表团-搜狐新闻...</a></li>
+								 <li><a href="/content/2708.html">习近平：摆脱贫困-搜狐新闻...</a></li>
+								 <li><a href="/content/2709.html">缅甸反华媒体大佬被捕 多次发布假消息抹黑中国-搜狐新闻...</a></li>
+								 <li><a href="/content/2710.html">抽查千台无一合格！什么手机这么不让人放心？-搜狐新闻...</a></li>
+								 <li><a href="/content/2711.html">台湾高中生扮纳粹事件持续延烧 涉事学校校长辞职-搜狐新闻...</a></li>
+								 <li><a href="/content/2712.html">警方打掉编造散布系列“舆情员”网络谣言团伙-搜狐新闻...</a></li>
+                        </ul>
+                    </div>
+                  </div>
+            </div>
+            
+		<div style="height:10px;"></div>
+            
+            <div class="ad2">
+				      <a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="1000" height="69" /></a>
+				      <a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="1000" height="69" /></a>
+            </div>
+
+            <div class="matter5">
+					<div class="news">
+                	<div class="info">
+                        <div class="title">前端开发</div>
+                        <div class="more"><a href="/channel/front">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2598.html" class="newslist_time" title="#">河南一法院副院长敲诈两名市(县)委书记 私吞罚金-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2592.html" class="newslist_time" title="#">明知违法 甘愿“身体被掏空”？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2593.html" class="newslist_time" title="#">深圳拟赋予4万辅警执法权 并调整薪酬标准-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2594.html" class="newslist_time" title="#">韩媒：美韩首次宣布对朝“延伸威慑”意味什么-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2595.html" class="newslist_time" title="#">郭声琨会见香港特区政府代表团-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2596.html" class="newslist_time" title="#">习近平出席G20领导人杭州峰会系列活动纪实-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2597.html" class="newslist_time" title="#">辽宁营口发生劫持运钞车事件 3500万元现金被劫-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2585.html" class="newslist_time" title="#">第二批公办养老机构改革试点展开 公建民营为重点-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2586.html" class="newslist_time" title="#">郭德纲曹云金 “互撕”伤了谁？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2587.html" class="newslist_time" title="#">山东省工商局原局长牛启忠受贿案宣判 获刑五年-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+                
+					<div class="news">
+                	<div class="info1">
+                        <div class="title">后端开发</div>
+                        <div class="more"><a href="/channel/server">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2016-09-19</div>
+								   <a href="/content/2609.html" class="newslist_time" title="#">内地警方向香港移交重大抢劫杀人犯罪嫌疑人-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2610.html" class="newslist_time" title="#">营口持枪抢劫运钞车案 嫌犯在逃中-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2611.html" class="newslist_time" title="#">福克斯前CEO性骚扰女主播 赔偿1.33亿和解-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2612.html" class="newslist_time" title="#">中纪委网站这三年：让百姓感知党中央反腐决心-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2613.html" class="newslist_time" title="#">辽宁抚顺市(矿震)发生2.8级地震 震源深度0千米-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2603.html" class="newslist_time" title="#">国家质检总局就寨卡病毒病疫情发布旅行警示-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2604.html" class="newslist_time" title="#">普京专车发生交通事故 司机当场死亡(图)-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2605.html" class="newslist_time" title="#">漯河原市委委员秦建忠被双开 被指与黑老大关系密切-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2606.html" class="newslist_time" title="#">G20峰会倒计时 杭州已成总统专机最多的城市-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2607.html" class="newslist_time" title="#">公安部长就电信诈骗表态：决不能让悲剧屡屡发生-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+                
+					<div class="news">
+                	<div class="info2">
+                        <div class="title">移动开发</div>
+                        <div class="more"><a href="/channel/app">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2620.html" class="newslist_time" title="#">这个中秋 传统味儿够足-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2621.html" class="newslist_time" title="#">李克强美洲三国行哪些看点值得期待？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2622.html" class="newslist_time" title="#">前瞻：李克强联大“首秀” 三大看点可期-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2623.html" class="newslist_time" title="#">浙江干部因台风“搀扶照”被免 事件正在调查中-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2615.html" class="newslist_time" title="#">骨骼清奇的菲律宾总统，到底是怎样一个人？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2616.html" class="newslist_time" title="#">女儿在宿舍受气 父母来校“帮忙”殴打4名舍友-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2617.html" class="newslist_time" title="#">7岁男童中秋夜被继母砍20余刀 刀刀致命(图)-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2618.html" class="newslist_time" title="#">李克强：各级政府官员要不断提高感知群众冷暖-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2619.html" class="newslist_time" title="#">北京大部分地区现雷阵雨 气象台发雷电黄色预警-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-16</div>
+								   <a href="/content/2614.html" class="newslist_time" title="#">中科院：霾污染影响粮食作物产量-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+            </div>       
+
+            <div style="height:10px;"></div>
+            <div class="ad2">
+				      <a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="1000" height="69" /></a>
+				      <a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="1000" height="69" /></a>
+            </div>
+
+			<div class="matter5">
+					<div class="news">
+                	<div class="info">
+                        <div class="title">基础语言</div>
+                        <div class="more"><a href="/channel/basic">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2017-07-19</div>
+								   <a href="/content/2144.html" class="newslist_time" title="#">苏郑不再担任南京玄武区委常委 此前被指抗涝摆拍-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2532.html" class="newslist_time" title="#">河南鹤壁公安局副局长被双开 曾被称为警界英雄-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2533.html" class="newslist_time" title="#">[明说吧]大学生绘性骚扰地图-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2534.html" class="newslist_time" title="#">江苏镇江副市长蒋建明辞职获批-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2535.html" class="newslist_time" title="#">国务院安委会办公室：第二批安全生产巡查名单确定-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2536.html" class="newslist_time" title="#">韩拟重启汉江入海口执法 防中国渔船“非法捕捞”-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2537.html" class="newslist_time" title="#">菲外长再提南海仲裁案：中国必须承认 -搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2538.html" class="newslist_time" title="#">徐玉玉电信诈骗案三嫌犯在逃 公安部发布A级通缉令-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2539.html" class="newslist_time" title="#">“冰箭”登陆！长征五号抵达海南文昌发射场-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2540.html" class="newslist_time" title="#">郭声琨会见香港特区政府代表团-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+                
+					<div class="news">
+                	<div class="info1">
+                        <div class="title">数据库</div>
+                        <div class="more"><a href="/channel/databases">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2017-06-12</div>
+								   <a href="/content/2097.html" class="newslist_time" title="#">姚晨夫妇为儿子庆生 眼尖网友却看到吕秀才-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2502.html" class="newslist_time" title="#">希拉里首次回击“健康有问题” 徒手开罐头辟谣-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2503.html" class="newslist_time" title="#">令计划令政策领衔 官场落马“兄弟档”还有谁？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2504.html" class="newslist_time" title="#">全国人大机关2名部级官员被问责 4名官员被双开-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2505.html" class="newslist_time" title="#">日本举办殡葬产业博览会 女僧人获赞颜值高(图)-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2506.html" class="newslist_time" title="#">媒体：八达岭老虎咬人事故调查报告你看懂了吗？-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2507.html" class="newslist_time" title="#">山东临沂一女孩被骗学费9900元 郁结于心离世-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2508.html" class="newslist_time" title="#">宣昌能将任证监会主席助理 陆磊接手央行稳定局-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2509.html" class="newslist_time" title="#">央地财政事权和支出责任改革路线图出炉-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-08-25</div>
+								   <a href="/content/2510.html" class="newslist_time" title="#">美中学生称被女教师勾引生子 获赔600万美元-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+                
+					<div class="news">
+                	<div class="info2">
+                        <div class="title">设计创作</div>
+                        <div class="more"><a href="/channel/design">+more</a></div>
+               		</div>
+                    <div class="content">
+                    	  <ul>  
+								 <li>
+								   <div class="time">2017-07-19</div>
+								   <a href="/content/2082.html" class="newslist_time" title="#">事关你的养老、工资、医保！未来5年将这样变化-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2560.html" class="newslist_time" title="#">三星新1代TabPro S曝光：搭完整版Win10-搜狐数码...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2547.html" class="newslist_time" title="#">中国奶业D20峰会聚力供给侧改革 飞鹤点燃升级新引擎-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2548.html" class="newslist_time" title="#">白银案刑警遗孀哭祭：你追了20年的人终于抓到了-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2549.html" class="newslist_time" title="#">开国上将刘亚楼旧居遭强拆 11名领导干部被追责-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2550.html" class="newslist_time" title="#">韩驻华大使盛赞中国主办G20峰会 必将取得显著成果-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2551.html" class="newslist_time" title="#">全国近两成企业服务质量不合格 服务热线形同虚设-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2552.html" class="newslist_time" title="#">中国驻吉尔吉斯使馆附近爆炸-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2553.html" class="newslist_time" title="#">中国乒乓球的大魔王们合体啦-搜狐新闻...</a>
+								 </li>
+								 <li>
+								   <div class="time">2016-09-01</div>
+								   <a href="/content/2554.html" class="newslist_time" title="#">江苏拟立法应对校园欺凌 专家建议中学配校警-搜狐新闻...</a>
+								 </li>
+                          </ul>
+                    </div>
+                    </div>
+            </div>   
+            
+            <div style="height:10px;"></div>
+            
+            <div id="tabs0">
+			<div class="hdk">
+				<ul class="menu0" id="menu0">
+					<li onClick="setTab(0,0)" class="hover">娱乐图集</li>
+					<li onClick="setTab(0,1)">文化校园</li>
+				</ul>
+			</div>
+			<div class="piece" id="piece0">
+				<ul style="display: block;">
+					<li>
+						<div class="matter2">
+							<div class="content">
+								<div class="left">
+									<div class="tp1">
+										<img src="http://7u2hth.com1.z0.glb.clouddn.com/1474118274209.jpg" width="210" height="276" />
+									</div>
+									<div class="biaoti">
+										<strong>拍摄主题：娱乐图集</strong><br />拍摄时间：2013-5-15
+									</div>
+								</div>
+								<div class="right">
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473176116543.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">娱乐图集一</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473176100343.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">娱乐图集二</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473176266776.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">娱乐图集三</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243728307.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">娱乐图集四</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243797746.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">娱乐图集五</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> 
+				  </li>
+				</ul>
+				<ul style="display: none;">
+					<li>
+						<div class="matter2">
+							<div class="content">
+								<div class="left">
+									<div class="tp1">
+										<img src="http://7u2hth.com1.z0.glb.clouddn.com/1474355494574.jpg" width="210" height="276" />
+									</div>
+									<div class="biaoti">
+										<strong>拍摄主题：文化校园</strong><br />拍摄时间：2013-5-15
+									</div>
+								</div>
+								<div class="right">
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243546027.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园一</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243578514.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园二</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243400742.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园三</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243456858.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园四</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243480195.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园五</a>
+										</div>
+									</div>
+									<div class="prod">
+										<div class="tip">
+											<a href="#"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473243509163.jpg" width="205" height="125"></a>
+										</div>
+										<div class="scrt">
+											<a href="#">文化校园六</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> 
+				  </li>
+				</ul>
+				<ul>
+			</div>
+		</div>  
+</div>
+<div class="bottomwrap">
+	<div  class="bottom">
+		<ul>
+			 
+			<li  style="float: left;margin-left: 20px;"><a style="color: white;" href='http://cms.publiccms.com1' target='_blank' title='企业网站管理系统'>Publiccms</a></li>
+			 
+		</ul>
+	</div>
+	<div class="bottom">
+		<div class="wenzi">
+			youngcms 版权所有 - <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260175299'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1260175299%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			<br /> Copyright © 2016-2022 京ICP备12051136号
+		</div>
+	</div>
+</div>
+<!-- JiaThis Button BEGIN -->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UJian Button BEGIN -->
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide"></script>
+<!-- UJian Button END -->
+</body>
+</html>

@@ -1,0 +1,43 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/advertPosition/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }" />
+			</p>
+			<p>
+				<label>类型</label>
+				<select name="type">
+				<#list ADVERT_POSITION_TYPE_LIST as labelValue>
+				       <option value="${labelValue.value }" <#if pageForm.type?? && labelValue.value==(pageForm.type)?c >selected="selected"</#if>>${labelValue.label }</option>
+				   </#list>
+				</select>
+			</p>
+			<p>
+				<label>宽度</label> <input type="text" name="width" value="${(pageForm.width)! }"/>
+			</p>
+			<p>
+				<label>高度</label> <input type="text" name="height" value="${(pageForm.height)! }"/>
+			</p>
+			<p>
+				<label>是否开启</label>
+				<#list IS_OPEN as labelValue>
+				   ${labelValue.label }<input type="radio" name="isOpen" value="${labelValue.value }" <#if pageForm.isOpen?? && labelValue.value==(pageForm.isOpen)!c >checked="checked"</#if> />
+			    </#list>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:advertPosition:addOrUpdate">
+				   <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+

@@ -1,0 +1,33 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/flow/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }" />
+			</p>
+			<p>
+				<label>排序</label> <input type="text" name="sort" value="${(pageForm.sort)! }"/>
+			</p>
+			<p>
+				<label>是否开放</label> 
+				是<input type="radio" name="isOpen" value="1" <#if pageForm.isOpen?? && pageForm.isOpen==1>checked="checked"</#if> /> 
+				否<input type="radio" name="isOpen" value="2" <#if pageForm.isOpen?? && pageForm.isOpen==2>checked="checked"</#if> />
+			</p>
+			<p  class="nowrap">
+				<label>描述</label>
+				<textarea name="description" cols="50" rows="4">${(pageForm.description)! }</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:flow:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

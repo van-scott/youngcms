@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.CmsModelMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.CmsModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="temp_prefix" property="tempPrefix" jdbcType="VARCHAR" />
+    <result column="has_group_images" property="hasGroupImages" jdbcType="INTEGER" />
+    <result column="has_vedio" property="hasVedio" jdbcType="INTEGER" />
+    <result column="has_content" property="hasContent" jdbcType="INTEGER" />
+    <result column="has_options" property="hasOptions" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, temp_prefix, has_group_images, has_vedio, has_content, has_options, create_time, 
+    status
+  </sql>
+  
+</mapper>

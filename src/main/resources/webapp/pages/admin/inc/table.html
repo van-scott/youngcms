@@ -1,0 +1,22 @@
+<#macro table records ths>
+<thead>
+	<tr>
+		<#list ths as th>
+		<th width="5%">${th}</th>
+		</#list>
+	</tr>
+</thead>
+<#list records as bean>
+<tr align="center" target="id" rel="${bean.id }">
+	<td><input type="checkbox" name="ids" value="${bean.id }" /></td>
+	<td>${bean.id }</td>
+	<td>${bean.name }</td>
+	<td>${bean.href }</td>
+	<td><showCnContent:getCityName id="${bean.moduleType }"></showCnContent:getCityName></td>
+	<td><i class="${bean.icon!'' }"></i></td>
+	<td>${bean.target }</td>
+	<td>${bean.sort }</td>
+	<td align="center"><a title="删除" target="ajaxTodo" callback="jbsxBoxAjaxDone" href="${ctx }/admin/module/delete?id=${bean.id}" class="btnDel">删除</a> <a title="编辑" target="dialog" width="600" height="250" href="${ctx}/admin/module/showForm?id=${bean.id }" class="btnEdit">编辑</a></td>
+</tr>
+</#list>
+</#macro>

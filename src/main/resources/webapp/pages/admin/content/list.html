@@ -1,0 +1,91 @@
+<#include "/admin/inc/ctx.html">
+<#include "/admin/inc/pagerForm.html">
+<script type="text/javascript">
+$(function(){
+	$.ajax({  
+	        type : "POST",
+	        url : ctx+"/admin/content/getChannelModel",
+	        data : {channelId:'${pageData.bean.channelId}'},
+	        dataType: 'json',
+	        success : function(result) {
+	        	    var s="";
+	        		$.each(result, function(i, item){      
+	        			s+="<@shiro.hasPermission name='admin:content:form'><li><a href='${ctx}/admin/content/form?modelId="+item.modelId+"&channelId=${pageData.bean.channelId}' target='navTab'><i class='fa fa-plus'></i>"+item.modelName+"</a></li></@shiro.hasPermission>";
+	        		}); 
+	        		$(".toolBar",navTab.getCurrentPanel()).append(s);
+	        		$(".toolBar",navTab.getCurrentPanel()).initUI();
+	        }  
+	    });
+
+	});
+</script>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="${ctx}/admin/content/list">
+	<input type="hidden" name="channelId" value="${pageData.bean.channelId}" />
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>角色名称：</label>
+				<input type="text" name="keywords"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+
+	<div layoutH="124">
+	<table class="list"  targetType="navTab">
+		<thead>
+		  <tr>
+	        <th width="2%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+	        <th width="3%">索引号</th>
+	        <th width="20%">信息标题</th>
+	        <th width="5%">状态</th>
+	        <th width="5%">创建人</th>
+	        <th width="8%">创建时间</th>
+            <th width="8%">操作</th>     
+            </tr>
+		</thead>
+		<tbody>
+        <#list pageData.page.records as bean>
+	        <tr align="center" target="id" rel="${bean.id?c }">
+	        <td><input  type="checkbox" name="ids" value="${bean.id?c }" /></td>
+	        <td>${bean.id?c }</td>
+	        <td style="text-align: left;">
+		        <span style="color: red;">[${(bean.channelName)! }]</span>
+		        <span style="color: blue;">[${(bean.modelName)! }]</span>
+		        <#if _dict_cn_name("${bean.isTop}")=='是'>
+		             <span style="color: green;">[顶]</span>
+		        </#if>
+		        ${(bean.title)! }
+	        </td>
+	        <td>${flowStatusName("${bean.flowId}","${bean.status}")}</td>
+	        <td>${(bean.createUser)! }</td>
+	        <td>${(bean.createTime)! }</td>
+	        <td align="left">
+	            <@shiro.hasPermission name="admin:content:delete">
+				<a title="删除" target="ajaxTodo"  callback="ajaxTodoDone" href="${ctx }/admin/content/delete?id=${bean.id?c}"  class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:content:form">
+				<a title="编辑" target="navTab" href="${ctx}/admin/content/form?id=${bean.id?c }" class="editButton"><i class="fa fa-file-text-o"></i>&nbsp;编辑</a>
+				</@shiro.hasPermission>
+				${flowOperate("${bean.flowId}","${bean.status}","${ctx}/admin/content/nextNode?id=${bean.id?c }")}
+			</td>
+	        </tr>
+       </#list>
+		</tbody>
+	</table>
+	</div>
+	<#include "/admin/inc/pagination.html">
+</div>

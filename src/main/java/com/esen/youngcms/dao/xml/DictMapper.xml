@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.DictMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.Dict" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="dict_type_id" property="dictTypeId" jdbcType="INTEGER" />
+    <result column="ch_name" property="chName" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, sort, dict_type_id
+  </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select a.*,b.ch_name,b.en_name from tb_dict a  left join tb_dict_type b on a.dict_type_id=b.id ${ew.sqlSegment}
+  </select>
+  
+  <select id="selectPageRecords" resultMap="BaseResultMap">
+		SELECT a.*,b.ch_name,b.en_name from tb_dict a LEFT JOIN tb_dict_type b on a.dict_type_id=b.id ${ew.sqlSegment}
+  </select>
+  
+</mapper>

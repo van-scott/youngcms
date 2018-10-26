@@ -1,0 +1,52 @@
+<#include "/admin/inc/ctx.html">
+<#include "/admin/inc/pagerForm.html">
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="${ctx}/admin/operateLog/list">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>角色名称：</label>
+				<input type="text" name="keywords"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div layoutH="96">
+	<table class="list" targetType="navTab">
+		<thead>
+		  <tr>
+	        <th width="5%">编号</th>
+	        <th width="5%">模块</th>
+	        <th width="8%">请求URL</th>
+	        <th width="5%">IP</th>
+	        <th width="5%">操作者</th>
+	        <th width="8%">时间</th>
+         </tr>
+		</thead>
+		<tbody>
+		<#list pageData.page.records as bean>
+	        <tr target="id" rel="${bean.id }">
+	        <td>${bean.id?c }</td>
+	        <td align="left">${bean.moduleName }-${bean.optName }</td>
+	        <td align="left">${(bean.url)! }</td>
+	        <td>${(bean.ip)! }</td>
+	        <td>${bean.author }</td>
+	        <td>${bean.createTime }</td>
+	        </tr>
+         </#list>       
+       
+		</tbody>
+	</table>
+	</div>
+	
+	<#include "/admin/inc/pagination.html">
+
+</div>

@@ -1,0 +1,42 @@
+<div class="wrap_top">
+    	<div class="top">
+        	<div class="logo"><a href="#"><img src="${path}/images/logo.png" width="200" height="74" /></a></div>
+            <div id="navMenu">
+                <ul class="menu1">
+                <@_channel_list isNav=1 fields='sort' sort='asc';channels>
+				   <#list channels as pChannel>
+				     <#if pChannel.isOut == 1>
+				       <li><a href="${pChannel.outUrl!''}" target="_black">${pChannel.name}</a></li>
+					 <#else>
+					   <li><a href="${path}/channel/${pChannel.code}">${pChannel.name}</a>
+				          <@_channel_list pId="${pChannel.id}" fields='sort' sort='asc';channels>
+					        <#if (channels?size>0) >
+						        <ul>
+									<#list channels as channel>
+										 <li><a href="${path}/channel/${channel.code}">${channel.name}</a></li>
+									</#list> 
+								</ul>
+							 </#if>
+				          </@_channel_list>
+				       </li>
+					 </#if>
+				   </#list>
+                 </@_channel_list>
+                 </ul>
+			</div>
+        </div>
+</div>
+<script type="text/javascript">
+		sfHover = function() {
+		var sfEls = document.getElementById("navMenu").getElementsByTagName("li");
+		for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+		this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+		this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+		}
+		}
+		if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>

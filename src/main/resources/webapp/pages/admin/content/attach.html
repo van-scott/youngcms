@@ -1,0 +1,21 @@
+<div class="pageContent">
+	<form method="post" action="/admin/content/attachSet" class="pageForm required-validate" onsubmit="return iframeCallback(this, $.bringBack)">
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>附件/图片</label>
+				<input type="text" id="attachUrl" name="attachUrl"/>
+				<input type="file" id="attach" name="attach" style="display: none;" onchange="upload.ajaxFileUpload('attach','attachUrl','dialog');"/>
+				<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('attach');"><span>上传</span></a>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+

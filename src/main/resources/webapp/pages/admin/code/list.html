@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<body>
+    <form:form action="#" id="listForm" name="listForm">
+    <jsp:include page="/view/admin/common/place.jsp" />
+    <div class="rightinfo">
+   <!--  <div class="tools">
+    
+    	<ul class="toolbar">
+        <li class="click"><span><img src="/view/admin/resource/images/t01.png" /></span>添加</li>
+        <li class="click"><span><img src="/view/admin/resource/images/t02.png" /></span>修改</li>
+        <li><span><img src="/view/admin/resource/images/t03.png" /></span>删除</li>
+        <li><span><img src="/view/admin/resource/images/t04.png" /></span>统计</li>
+        </ul>
+        <ul class="toolbar1">
+        <li><span><img src="/view/admin/resource/images/t05.png" /></span>返回列表</li>
+        </ul>
+    </div> -->
+    <table class="tablelist">
+    	<thead>
+	    	<tr>
+	        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+	        <th>模型名称</th>
+	        <th>service是否存在</th>
+	        <th>serviceImpl是否存在</th>
+	        <th>dao是否存在</th>
+	        <th>daoImpl是否存在</th>
+	        <th>操作</th>
+	        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${pageView.pageDate }" var="bean">
+	        <tr>
+	        <td><input name="" type="checkbox" value="" /></td>
+	        <td>${bean.clazzName }</td>
+	        <td>
+	            <c:choose>
+	               <c:when test="${bean.serviceExist==1 }">是</c:when>
+	               <c:otherwise>否</c:otherwise>
+	            </c:choose>
+	        </td>
+	        <td>
+	         <c:choose>
+	               <c:when test="${bean.serviceImplExist==1 }">是</c:when>
+	               <c:otherwise>否</c:otherwise>
+	            </c:choose>
+	        </td>
+	        <td>
+	         <c:choose>
+	               <c:when test="${bean.daoExist==1 }">是</c:when>
+	               <c:otherwise>否</c:otherwise>
+	            </c:choose>
+	        </td>
+	        <td>
+	         <c:choose>
+	               <c:when test="${bean.daoImplExist==1 }">是</c:when>
+	               <c:otherwise>否</c:otherwise>
+	            </c:choose>
+	        </td>
+	        <td><a href="javascript:handle('确定要生成吗?','${psth }/admin/code/create?clazzName=${bean.clazzName }')" class="add">生成</a></td>
+	        </tr> 
+        </c:forEach>
+        </tbody>
+    </table>
+    <jsp:include page="/view/admin/common/pageinfo.jsp" />
+    <div class="tip">
+      <div class="tiptop"><span>提示信息</span><a></a></div>
+      <div class="tipinfo">
+        <span><img src="/view/admin/resource/images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    </div>
+    </div>
+    </form:form>
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<header>
+<div class="inner">
+<div class="top-logo">
+    <!-- <a href="http://www.51opencms.com" title="openCms" id="web_logo">
+		<img src="${path}/static/default/images/logo.png" alt="网站名称" title="网站名称" style="margin:20px 0px 0px 0px;" />
+	</a> -->
+
+<ul class="top-nav list-none">
+<li class="t">
+<a href='#' onclick='SetHome(this,window.location,"非IE浏览器不支持此功能，请手动设置！");' style='cursor:pointer;' title='设为首页'  >设为首页</a><span>|</span>
+<a href='#' onclick='addFavorite("非IE浏览器不支持此功能，请手动设置！");' style='cursor:pointer;' title='收藏本站'  >收藏本站</a><span>
+</ul>
+</div>
+
+<nav>
+<ul class="list-none">
+<@channelList isNav=1 fields='sort' sort='asc';channels>
+   <#list channels as channel>
+<li style='width:121px;' id="${channel.code}"><a href='${path}/channel/${channel.code}' class='nav' style="display:width: 121px;display: block;"><span>${channel.name}</span></a></li>
+<li class="line"></li>
+   </#list>
+</@channelList>
+</ul>
+</nav>
+</div>
+</header>
+<!-- <script type="text/javascript">
+var code='${channel.code}';
+$("#"+code+"").addClass("navdown");
+</script> -->

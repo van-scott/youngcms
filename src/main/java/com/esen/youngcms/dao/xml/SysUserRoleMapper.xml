@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.SysUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.SysUserRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="sys_user_id" property="sysUserId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, sys_user_id
+  </sql>
+  
+  <delete id="deleteBySysUserId" parameterType="java.lang.Integer" >
+    delete from tb_sys_user_role
+    where sys_user_id = #{sysUserId,jdbcType=INTEGER}
+  </delete>
+  
+</mapper>

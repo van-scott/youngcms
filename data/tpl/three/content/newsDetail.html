@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=utf-8>
+<title>${contentDetail.title}</title>
+<link href="${path}/static/three/css/public.css" rel="stylesheet" type="text/css" />
+<link href="${path}/static/three/css/news.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="${path}/static/three/js/jquery.js"></script>
+<script type="text/javascript" src="${path}/static/three/js/jquery.Xslider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<#include "../include/header.html"/>
+<div id="slider1" class="slider">
+			<@advertList advertPositionId=4 size=6;averts,advertPosition>
+			 <div class="conbox">
+			     <#list averts as avert>
+					 <div><a href="#" title=""><img src="${avert.imgUrl}" width="1000" height="355" /></a></div>
+				</#list>
+			</div>
+			<div class="switcher">
+				<#list 1..(averts?size) as i>
+					    <#if i==1>
+					         <a href="#" class="cur">${i}</a>
+					    <#else>
+					         <a href="#">${i}</a>
+					    </#if>
+			   </#list>
+			</div>
+		</@advertList>
+</div>
+<div class="mian">
+    <div class="matter">
+        <div class="left">
+        	<div class="a03">
+            	<div class="info">资讯分类</div>
+                    <div class="content">
+                   		<ul>
+                            <@channelList pId=44 fields='sort' sort='asc';channels>
+						      <#list channels as chl>
+						            <li><a href="${path}/channel/${chl.code}">${chl.name}</a></li>
+						      </#list> 
+				            </@channelList>
+                        </ul>
+                   </div>
+            </div>
+        </div>
+        <div class="right">
+        	<div class="new">
+            	<div class="info">
+                	<div class="title"></div>
+                </div>
+                <div class="content2">
+                	<h2>${contentDetail.title}</h2>
+                    <div class="biaot">作者：管理员    发布于：${contentDetail.createTime}</div>   
+                    <div class="neirong">
+                      ${contentDetail.contentText.text}
+                    </div>      
+                </div>
+                <!--PC版-->
+				<div id="SOHUCS" ></div>
+				<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+				window.changyan.api.config({
+				appid: 'cysAHHhaO',
+				conf: 'prod_5f647ad9827d1f00a1cb65cdef0a1f61'
+				});
+				</script>
+            </div>
+        </div>
+    </div>	
+
+ </div>
+<#include "../include/footer.html"/>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/friendLink/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p>
+				<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }" />
+			</p>
+			<p>
+				<label>类型</label> 
+				<select name="type">
+				   <#list FRIEND_LINK_TYPE_LIST as labelValue>
+				       <option value="${labelValue.value }" <#if pageForm.type?? && labelValue.value==pageForm.type?c>selected="selected"</#if>>${labelValue.label }</option>
+				   </#list>
+				</select>
+			</p>
+			<p>
+				<label>图片</label>
+				<input type="text" id="imgUrl" name="imgUrl" value="${(pageForm.imgUrl)! }"/>
+				<input type="file" id="imgUrlFile" name="imgUrlFile" style="display: none;" onchange="upload.ajaxFileUpload('imgUrlFile','imgUrl','dialog');"/>
+				<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('imgUrlFile');"><span>上传</span></a>
+			</p>
+			<p>
+				<label>链接地址</label>
+				<input type="text" name="url" value="${(pageForm.url)! }" />
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:friendLink:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+

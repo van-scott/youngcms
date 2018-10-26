@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>openCms-免费的JAVA CMS(内容管理系统)</title>
+<meta name="description" content="网站描述，一般显示在搜索引擎搜索结果中的描述文字，用于介绍网站，吸引浏览者点击。" />
+<meta name="keywords" content="网站关键词" />
+<meta name="generator" content="MetInfo 5.1.7" />
+<link href="favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="${path}/static/default/css/metinfo.css" />
+<script src="${path}/static/default/js/jQuery1.7.2.js" type="text/javascript"></script>
+<script src="${path}/static/default/js/ch.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <#include "../include/header.html"/>
+	<div class="inner met_flash"><div class="flash">
+    <@advertList advertPositionId=4 size=1;averts,advertPosition>
+	   <#list averts as avert>
+	      <a href='#' target='_blank' title='企业网站管理系统'><img src='${avert.imgUrl}' width='980' alt='企业网站管理系统' height='90'></a>
+	   </#list>
+    </@advertList>
+</div></div>
+
+
+<div class="sidebar inner">
+    <div class="sb_nav">
+
+			<h3 class='title myCorner' data-corner='top 5px'>新闻资讯</h3>
+            <div class="active" id="sidebar" data-csnow="2" data-class3="0" data-jsok="2">
+			      <@channelList pId=43 fields='sort' sort='asc';channels>
+						<#list channels as channel>
+							<dl class="list-none navnow"><dt id='part2_4'><a href='${path}/channel/${channel.code}'  title='公司动态' class="zm"><span>${channel.name}</span></a></dt></dl>
+						</#list> 
+				 </@channelList>
+			<div class="clear"></div>
+			</div>
+    </div>
+    <div class="sb_box">
+	    <h3 class="title">
+<div class="position">当前位置：<a href="http://demo.metinfo.cn/" title="网站首页">网站首页</a> &gt; <a href=../news/ >新闻资讯</a> > <a href=../news/news.php?lang=cn&class2=5 >业界资讯</a></div>
+			<span>业界资讯</span>
+		</h3>
+		<div class="clear"></div>
+			<div class="active" id="shownews">
+				<h1 class="title">${contentDetail.title}</h1>
+				<div class="editor">
+					<div>
+					${contentDetail.contentText.text}
+						<div id="metinfo_additional"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="met_hits">
+					<div class='metjiathis'>
+						<div class="jiathis_style">
+							<span class="jiathis_txt">分享到：</span><a
+								class="jiathis_button_icons_1"></a><a
+								class="jiathis_button_icons_2"></a><a
+								class="jiathis_button_icons_3"></a><a
+								class="jiathis_button_icons_4"></a><a
+								href="http://www.jiathis.com/share"
+								class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+						</div>
+						<script type="text/javascript"
+							src="http://v3.jiathis.com/code/jia.js?uid=1346378669840136"
+							charset="utf-8"></script>
+					</div>
+					点击次数：<span><script language='javascript'
+							src='../include/hits.php?type=news&id=10'></script></span>&nbsp;&nbsp;更新时间：${contentDetail.createTime}&nbsp;&nbsp;【<a href="javascript:window.print()">打印此页</a>】&nbsp;&nbsp;【<a
+						href="javascript:self.close()">关闭</a>】
+				</div>
+				<div class="met_page">
+					上一条：<a href='shownews.php?lang=cn&id=4'>${preContentTitle("${contentDetail.id?c}")}</a>&nbsp;&nbsp;
+					下一条：<a href='shownews.php?lang=cn&id=4'>${nextContentTitle("${contentDetail.id?c}")}</a>
+				</div>
+			</div>
+			
+			
+			<!--PC版-->
+			<div id="SOHUCS" ></div>
+			<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+			<script type="text/javascript">
+			window.changyan.api.config({
+			appid: 'cysAHHhaO',
+			conf: 'prod_5f647ad9827d1f00a1cb65cdef0a1f61'
+			});
+			</script>
+			
+			
+		</div>
+    <div class="clear"></div>
+</div>
+<#include "../include/footer.html"/>
+<script src="images/fun.inc.js" type="text/javascript"></script>
+
+</body>
+</html>

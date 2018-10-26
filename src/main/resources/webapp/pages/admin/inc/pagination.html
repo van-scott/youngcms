@@ -1,0 +1,15 @@
+	<div class="panelBar" >
+		<div class="pages">
+			<span>显示</span>
+			<select name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+				<option value="20" <#if pageData.page.size == 20>selected="selected"</#if>>20</option>
+				<option value="50" <#if pageData.page.size == 50>selected="selected"</#if>>50</option>
+				<option value="100" <#if pageData.page.size == 100>selected="selected"</#if>>100</option>
+				<option value="200" <#if pageData.page.size == 200>selected="selected"</#if>>200</option>
+			</select>
+			<span>条，共${pageData.page.total }条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab"  totalCount="${pageData.page.total?c }" numPerPage="${pageData.page.size?c }" pageNumShown="10" currentPage="${pageData.page.current?c }"></div>
+
+	</div>

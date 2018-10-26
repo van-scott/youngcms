@@ -1,0 +1,42 @@
+<#include "/admin/inc/ctx.html">
+<style type="text/css">
+#codeContent{
+font-size:14px;
+font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
+}
+</style>
+<script>
+var staticForm={
+		sub:function(){
+			var pageFormContent=$(".pageForm",navTab.getCurrentPanel());
+			validateCallback(pageFormContent);
+		}
+}
+</script>
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/template/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="absolutePath" id="absolutePath" value="${(pageForm.absolutePath)! }"/>
+		<input type="hidden" name="parentPath" id="absolutePath" value="${(pageForm.parentPath)! }"/>
+		<input type="hidden" name="content" id="content" value="${(pageForm.content)! }"/>
+		<div class="pageFormContent" layoutH="45">
+			<p>
+				<label>资源名</label> <input readonly="readonly" type="text" name="chName" value="${(pageForm.name)! }" />
+			</p>
+			<p class="nowrap" layoutH="92">
+				<textarea id="codeContent" name="content" style="width: 99%;height: 95%">${(pageForm.content)! }</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:template:addOrUpdate">
+				<li><a class="buttonActive" href="javascript:staticForm.sub();"><span>保存</span></a></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+

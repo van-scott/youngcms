@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esen.youngcms.dao.SiteMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.esen.youngcms.bean.Site">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="simple_name" property="simpleName" />
+		<result column="seo_title" property="seoTitle" />
+		<result column="seo_keyword" property="seoKeyword" />
+		<result column="seo_description" property="seoDescription" />
+		<result column="domain" property="domain" />
+		<result column="port" property="port" />
+		<result column="source_path" property="sourcePath" />
+		<result column="path" property="path" />
+		<result column="copyright" property="copyright" />
+		<result column="record_number" property="recordNumber" />
+		<result column="logo" property="logo" />
+		<result column="protocol" property="protocol" />
+		<result column="postfix" property="postfix" />
+		<result column="is_master" property="isMaster" />
+		<result column="author" property="author" />
+		<result column="create_time" property="createTime" />
+		<result column="status" property="status" />
+	</resultMap>
+
+</mapper>

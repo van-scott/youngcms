@@ -1,0 +1,75 @@
+<#include "/admin/inc/ctx.html">
+<#include "/admin/inc/pagerForm.html">
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="${ctx}/admin/friendLink/list">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>角色名称：</label>
+				<input type="text" name="keywords"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		    <@shiro.hasPermission name="admin:friendLink:form">
+			<li><a  href="${ctx}/admin/friendLink/form" target="dialog" width="400" height="250"><i class="fa fa-plus"></i>添加</a></a></li>
+			<li><a  href="demo_page4.html?uid={sid_user}" target="navTab" warn="请选择一条记录"><i class="fa fa-edit"></i>修改</a></a></li>
+			</@shiro.hasPermission>
+			<@shiro.hasPermission name="admin:friendLink:delete">
+			<li><a  href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗？" warn="请选择一条记录"><i class="fa fa-trash-o">&nbsp;</i>删除</a></a></li>
+			</@shiro.hasPermission>
+			<li class="line">line</li>
+		</ul>
+	</div>
+
+	<div layoutH="124">
+	<table class="list"  targetType="navTab">
+		<thead>
+	    	<tr>
+	    	<th width="5%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+	        <th width="5%">编号</th>
+	        <th width="10%">名称</th>
+	        <th width="10%">类型</th>
+	        <th width="10%">图片地址</th>
+	        <th width="10%">链接地址</th>
+	        <th width="10%">点击次数</th>
+	        <th width="10%">创建时间</th>
+            <th width="10%">操作</th>	       
+          </tr>
+		</thead>
+		<tbody>
+		<#list pageData.page.records as bean>
+	        <tr align="center" target="id" rel="${bean.id }">
+	        <td><input  type="checkbox" name="ids" value="${bean.id }" /></td>
+	        <td>${bean.id }</td>
+	        <td>${bean.name }</td>
+	        <td>${_dict_cn_name("${bean.type}")}</td>
+	        <td><img src="${bean.imgUrl }" width="90%" height="40"/></td>
+	        <td>${bean.url }</td>
+	        <td>${(bean.clickNum)! }</td>
+	        <td>${(bean.createTime)! }</td>
+	        <td align="center">
+	            <@shiro.hasPermission name="admin:friendLink:delete">
+				<a title="删除" target="ajaxTodo" callback="ajaxTodoDone" href="${ctx }/admin/friendLink/delete?id=${bean.id}" class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:friendLink:form">
+				<a title="编辑" target="dialog" width="400" height="250" href="${ctx}/admin/friendLink/form?id=${bean.id }" class="editButton"><i class="fa fa-file-text-o"></i>&nbsp;编辑</a>
+				</@shiro.hasPermission>
+			</td>
+	        </tr>
+          </#list>
+		</tbody>
+	</table>
+	</div>
+	<#include "/admin/inc/pagination.html">
+</div>

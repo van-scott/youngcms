@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=utf-8>
+<title>youngcms-免费的JAVA CMS-内容管理系统-精彩图库</title>
+<link href="/css/photo.css" rel="stylesheet" type="text/css" />
+<link href="/css/public.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.se1 {background:#e8e6eb;  font-weight:bold;color:#167eff;}
+.se2 a{ background:#167eff; color:#fff; padding:2px;}
+</style>
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.Xslider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<div class="wrap_top">
+    	<div class="top">
+        	<div class="logo"><a href="#"><img src="/static/three/images/logo.png" width="200" height="74" /></a></div>
+            <div id="navMenu">
+                <ul class="menu1">
+					   <li><a href="/channel/index">网站首页</a>
+				       </li>
+				       <li><a href="" target="_black">技术分享</a></li>
+					   <li><a href="/channel/photo">精彩图库</a>
+						        <ul>
+										 <li><a href="/channel/yule">娱乐图集</a></li>
+										 <li><a href="/channel/wenhua">文化校园</a></li>
+										 <li><a href="/channel/fouce">焦点图片</a></li>
+										 <li><a href="/channel/zuguo">祖国之美</a></li>
+								</ul>
+				       </li>
+					   <li><a href="/channel/news">新闻资讯</a>
+						        <ul>
+										 <li><a href="/channel/it_news">IT资讯</a></li>
+										 <li><a href="/channel/sys_news">系统介绍</a></li>
+								</ul>
+				       </li>
+				       <li><a href="https://git.oschina.net/fumiao/opencms_51opencms" target="_black">源码下载</a></li>
+					   <li><a href="/channel/message">在线留言</a>
+				       </li>
+					   <li><a href="/channel/about">联系我们</a>
+				       </li>
+				       <li><a href="http://www.51opencms.com/admin/index" target="_black">管理平台</a></li>
+                 </ul>
+			</div>
+        </div>
+</div>
+<script type="text/javascript">
+		sfHover = function() {
+		var sfEls = document.getElementById("navMenu").getElementsByTagName("li");
+		for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+		this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+		this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+		}
+		}
+		if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
+<div id="slider1" class="slider">
+			 <div class="conbox">
+					 <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474274239494.jpg" width="1000" height="355" /></a></div>
+					 <div><a href="#" title=""><img src="http://7u2hth.com1.z0.glb.clouddn.com/1474188199146.jpg" width="1000" height="355" /></a></div>
+			</div>
+			<div class="switcher">
+					         <a href="#" class="cur">1</a>
+					         <a href="#">2</a>
+			</div>
+</div>
+<div class="mian">
+<div class="matter2">
+            	<div class="info">
+                	<div class="title"></div>
+                </div>
+                <div class="choose">
+                	<div class="select1">
+                    	<ul>
+						                <li><a href="/channel/yule">娱乐图集</a></li>
+						                <li><a href="/channel/wenhua">文化校园</a></li>
+						                <li><a href="/channel/fouce">焦点图片</a></li>
+						                <li><a href="/channel/zuguo">祖国之美</a></li>
+                        </ul>
+                    </div>
+                </div>
+              <div class="content">
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1471506389911.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">图库二</a></div>
+		                            <div class="rq">2016-08-18</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473166822411.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">图库三</a></div>
+		                            <div class="rq">2016-09-06</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1471506410874.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">图库四</a></div>
+		                            <div class="rq">2016-10-04</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473166841477.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">图库五</a></div>
+		                            <div class="rq">2016-09-06</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1471506527928.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">图库六</a></div>
+		                            <div class="rq">2016-08-18</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473167022414.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">测试七</a></div>
+		                            <div class="rq">2016-09-06</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473167122046.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">测试八</a></div>
+		                            <div class="rq">2016-09-06</div>
+		                        </div>
+	              		    </div>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="http://7u2hth.com1.z0.glb.clouddn.com/1473167136789.jpg" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">测试八</a></div>
+		                            <div class="rq">2016-10-04</div>
+		                        </div>
+	              		    </div>
+                </div>
+                <div class="digg"><span class="disabled"> < </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> > </a></div>
+            </div>
+ </div>
+<div class="bottomwrap">
+	<div  class="bottom">
+		<ul>
+			 
+			<li  style="float: left;margin-left: 20px;"><a style="color: white;" href='http://cms.publiccms.com1' target='_blank' title='企业网站管理系统'>Publiccms</a></li>
+			 
+		</ul>
+	</div>
+	<div class="bottom">
+		<div class="wenzi">
+			youngcms 版权所有 - <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260175299'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1260175299%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+			<br /> Copyright © 2016-2022 京ICP备12051136号
+		</div>
+	</div>
+</div>
+<!-- JiaThis Button BEGIN -->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<!-- UJian Button BEGIN -->
+	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide"></script>
+<!-- UJian Button END -->
+</body>
+</html>

@@ -1,0 +1,157 @@
+<#include "/admin/inc/ctx.html">
+<!-- 颜色选择器 -->
+<link rel="stylesheet" media="screen" type="text/css" href="${ctx}/webapp/static/lib/cxcolor/css/jquery.cxcolor.css" />
+<script type="text/javascript" src="${ctx}/webapp/static/lib/cxcolor/jquery.cxcolor.js"></script>
+<script type="text/javascript">
+var contentForm={
+	sub:function(){
+		var pageFormContent=$(".pageForm",navTab.getCurrentPanel());
+		validateCallback(pageFormContent, navTabAjaxDone);
+	}
+};
+$(function(){
+	 if($("#contentText",navTab.getCurrentPanel()).length>0){
+		UE.delEditor('contentText');
+	    UE.getEditor('contentText');
+	} 
+	$('#titleColor').cxColor();
+});
+</script>
+
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/content/addOrUpdate" class="pageForm required-validate">
+	    <input type="hidden" name="id" value="${(pageForm.id?c)! }">
+				<div class="pageFormContent" layoutH="45"> 
+					<p  class="nowrap">
+						<label>标题</label> <input type="text" name="title" value="${(pageForm.title)! }" class="required" size="100"/>
+					</p>
+					<p>
+						<label>短标题</label> <input type="text" name="shortTitle" value="${(pageForm.shortTitle)! }" class="required" size="30" />
+					</p>
+					<p>
+						<label>标题颜色</label> <input type="text" name="titleColor" value="${(pageForm.titleColor)! }" id="titleColor" size="30">
+					</p>
+					<p>
+						<label>Tag标签</label> <input type="text" name="tags" value="${(pageForm.tags)! }"  size="30"/>
+					</p>
+					<p>
+						<label>来源</label> <input type="text" name="source" value="${(pageForm.source)! }"  size="30"/>
+					</p>
+					<p>
+						<label>作者</label> <input type="text" name="author"  value="${(pageForm.author)! }" size="30"/>
+					</p>
+					<p>
+						<label>缩略图</label>
+						<input type="text" id="imgUrl" name="imgUrl" value="${(pageForm.imgUrl)! }" size="30"/>
+						<input type="file" id="imgUrlFile" name="imgUrlFile" style="display: none;" onchange="upload.ajaxFileUpload('imgUrlFile','imgUrl','navTab');"/>
+						<a class="buttonActive" href="javascript:void(0);" onclick="upload.chooseFile('imgUrlFile');"><span>上传</span></a>
+					</p>
+					<p>
+						<label>置顶</label>
+						<#list YES_OR_NO as labelValue>
+						      <input type="radio" name="isTop" value="${labelValue.value }" <#if pageForm.isTop?? && labelValue.value==pageForm.isTop?c>checked="checked"</#if> />${labelValue.label }
+						</#list>
+					</p>
+					<p>
+						<label>允许评论</label> 
+						<#list YES_OR_NO as labelValue>
+						    <input type="radio" name="isComment" value="${labelValue.value }" <#if pageForm.isComment?? && labelValue.value==pageForm.isComment?c>checked="checked"</#if> />${labelValue.label }
+						</#list>
+					</p>
+					<p>
+						<label>开始时间</label> 
+						<input type="text" name="startTime" class="date required" readonly="true" value="${(pageForm.startTime)! }"  size="30"/>
+						<a class="inputDateButton" href="javascript:;">选择</a>
+					</p>
+					<p>
+						<label>结束时间</label> 
+						<input type="text" name="endTime" class="date" readonly="true" value="${(pageForm.endTime)! }"  size="30"/>
+						<a class="inputDateButton" href="javascript:;">选择</a>
+					</p>
+					<p>
+						<label>所属栏目</label> 
+						<input type="hidden" name="channelId"  value="${(pageForm.channelId)! }" />
+						<input type="text" name="channelName"  value="${(pageForm.channelName)! }" readonly="readonly" size="30"/>
+					</p>
+					<p>
+						<label>模型</label>
+						<input type="hidden" name="modelId" value="${(pageForm.modelId)! }"  />
+						 <input type="text" name="modelName" value="${(pageForm.modelName)! }"  readonly="readonly" size="30"/>
+					</p>
+					<p>
+						<label>模板</label> <input type="text" name="template"  value="${(pageForm.template)! }" size="30"/>
+						<a class="buttonActive" title="编辑" target="dialog" rel="channel_form_dialog"  href="${ctx}/admin/template/chooseFile" mask=true width="280" height="400"><span>选择</span></a>
+					</p>
+					<p>
+						<label>权重</label><input name="weight" type="range" min="0" max="100" step="10" value="${(pageForm.weight)! }">
+					</p>
+					<p class="nowrap">
+						<label>简介</label><textarea name="description" cols="80" rows="4">${(pageForm.description)! }</textarea>
+					</p>
+					${extendFieldForm("${(modelType)!}","${(pageForm.modelId)!}","${(extendFieldValue.data)!}")}
+					<#if model.hasContent==YES>
+					<p class="nowrap">
+						<script id="contentText" name="content" type="text/plain"  style="width:100%;height:500px">${(pageForm.contentText.text)!}</script>
+					</p>
+					</#if>
+					<#if model.hasGroupImages==YES>
+					<p class="nowrap">
+					  <table  class="list nowrap itemDetail" width="100%" addButton="添加图片">
+						<thead>
+							<tr>
+								<th type="text" name="items.itemString[]" size="50" fieldClass="required">地址</th>
+								<th type="text" name="items.itemInt[]" size="50" fieldClass="digits">描述</th>
+								<th width="5%" type="del">操作</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					</P>
+					</#if>
+					<#if model.hasOptions==YES>
+					<p class="nowrap">
+					<table  class="list nowrap itemDetail" width="100%" addButton="添加附件">
+						<thead>
+							<tr>
+								<th type="attach" 
+								    name="items.attachment.attachUrl[]"
+								    lookupGroup="items.attachment" 
+								    lookupUrl="${ctx}/webapp/pages/admin/content/attach.html" 
+								    size="30">地址</th>
+								<th type="text" name="items.itemInt[]" size="30" fieldClass="digits">描述</th>
+								<th width="5%" type="del">操作</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					</p>
+					</#if>
+					<#if model.hasVedio==YES>
+					<p class="nowrap">
+					<table  class="list nowrap itemDetail" width="100%" addButton="添加视频">
+						<thead>
+							<tr>
+								<th type="attach" 
+								    name="items.attachment.attachUrl[]"
+								    lookupGroup="items.attachment" 
+								    lookupUrl="${ctx}/webapp/pages/admin/content/attach.html" 
+								    size="30">地址</th>
+								<th type="text" name="items.itemInt[]" size="30" fieldClass="digits">描述</th>
+								<th  width="5%"  type="del">操作</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					</p>
+					</#if>
+				</div>
+
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:content:addOrUpdate">
+			    <li><a class="buttonActive" href="javascript:contentForm.sub();"><span>保存</span></a></li>
+			    </@shiro.hasPermission>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+</div>

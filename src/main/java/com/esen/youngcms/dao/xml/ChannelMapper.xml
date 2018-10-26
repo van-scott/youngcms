@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.esen.youngcms.dao.ChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.esen.youngcms.bean.Channel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="is_nav" property="isNav" jdbcType="INTEGER" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="template" property="template" jdbcType="VARCHAR" />
+    <result column="is_out" property="isOut" jdbcType="INTEGER" />
+    <result column="out_url" property="outUrl" jdbcType="VARCHAR" />
+    <result column="mate_title" property="mateTitle" jdbcType="VARCHAR" />
+    <result column="mate_keywords" property="mateKeywords" jdbcType="VARCHAR" />
+    <result column="mate_description" property="mateDescription" jdbcType="VARCHAR" />
+    <result column="flow_id" property="flowId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, p_id, code, sort, is_nav , img_url , template, is_out ,out_url,mate_title,mate_keywords,mate_description,flow_id
+  </sql>
+  
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  a.*
+    from tb_channel a 
+    where  a.code=#{code,jdbcType=VARCHAR} limit 0,1
+  </select>
+  
+</mapper>

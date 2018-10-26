@@ -1,0 +1,75 @@
+<#include "/admin/inc/ctx.html">
+<#include "/admin/inc/pagerForm.html">
+<div class="pageHeader">
+	<form rel="pagerForm" method="post" action="${ctx}/admin/module/list" onsubmit="return divSearch(this,'jbsxBox');">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>模块名称：</label>
+				<input type="text" name="keywords"/>
+			</li>
+			<li>
+			<label>类型：</label>
+			<select class="combox" name="province">
+				<option value="">请选择</option>
+				<option value="北京">北京</option>
+				<option value="上海">上海</option>
+			</select>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a  href="${ctx}/admin/module/form" target="dialog" width="800" height="250"><i class="fa fa-plus"></i>添加</a></li>
+			<li><a  href="${ctx}/admin/module/delete?id={id}" target="ajaxTodo" title="确定要删除吗？" warn="请选择一条记录"><i class="fa fa-trash-o">&nbsp;</i>删除</a></a></li>
+			<li><a  href="${ctx}/admin/module/form?id={id}" target="dialog" warn="请选择一条记录"><i class="fa fa-edit"></i>修改</a></li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+
+	<div layoutH="133">
+	<table class="list"  targetType="navTab">
+		<thead>
+		  <tr>
+	        <th width="5%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+	        <th width="5%">编号</th>
+	        <th width="10%">模块名称</th>
+	        <th width="20%">URL</th>
+	        <th width="10%">是否显示</th>
+	        <th width="10%">图标</th>
+	        <th width="10%">TARGET</th>
+	        <th width="10%">排序</th>
+            <th width="10%">操作</th>	       
+            </tr>
+		</thead>
+		<tbody>
+		<#list pageData.page.records as bean>
+	        <tr align="center" target="id" rel="${bean.id }">
+	        <td><input  type="checkbox" name="ids" value="${bean.id }" /></td>
+	        <td>${bean.id }</td>
+	        <td>${bean.name }</td>
+	        <td>${bean.href }</td>
+	        <td><showCnContent:getCityName id="${bean.moduleType }"></showCnContent:getCityName></td>
+	        <td><i class="${bean.icon!'' }"></i></td>
+	        <td>${bean.target }</td>
+	        <td>${bean.sort!'' }</td>
+	        <td align="center">
+				<a title="删除" target="ajaxTodo" callback="jbsxBoxAjaxDone" href="${ctx }/admin/module/delete?id=${bean.id}"  class="delButton"><i class="fa fa-remove"></i>&nbsp;删除</a>
+				<a title="编辑" target="dialog" width="800" height="250" href="${ctx}/admin/module/form?id=${bean.id }" class="btnEdit">编辑</a>
+			</td>
+	        </tr>
+       </#list>
+		</tbody>
+	</table>
+	</div>
+	<#include "/admin/inc/jbsxBoxPagination.html">
+</div>

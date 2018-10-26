@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=utf-8>
+<title>youngcms-免费的JAVA CMS-内容管理系统-${channel.name}</title>
+<link href="${path}/css/photo.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/public.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.se1 {background:#e8e6eb;  font-weight:bold;color:#167eff;}
+.se2 a{ background:#167eff; color:#fff; padding:2px;}
+</style>
+
+<script type="text/javascript" src="${path}/js/jquery.js"></script>
+<script type="text/javascript" src="${path}/js/jquery.Xslider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	// 焦点图片水平滚动
+	$("#slider1").Xslider({
+		// 默认配置
+		affect: 'scrollx', //效果  有scrollx|scrolly|fade|none
+		speed: 800, //动画速度
+		space: 6000, //时间间隔
+		auto: true, //自动滚动
+		trigger: 'mouseover', //触发事件 注意用mouseover代替hover
+		conbox: '.conbox', //内容容器id或class
+		ctag: 'div', //内容标签 默认为<a>
+		switcher: '.switcher', //切换触发器id或class
+		stag: 'a', //切换器标签 默认为a
+		current:'cur', //当前切换器样式名称
+		rand:false //是否随机指定默认幻灯图片
+	});
+	
+	// 焦点图片垂直滚动
+	$("#slider2").Xslider({
+		affect:'scrolly',
+		ctag: 'div',
+		speed:400
+	});
+	
+	// 焦点图片淡隐淡现
+	$("#slider3").Xslider({
+		affect:'fade',
+		ctag: 'div'
+	});
+	
+	// 选项卡
+	$("#slider4").Xslider({
+		affect:'none',
+		ctag: 'div',
+		speed:10
+	});
+	
+	
+});
+</script>
+</head>
+
+<body>
+<#include "../include/header.html"/>
+<div id="slider1" class="slider">
+		<@_advert_list advertPositionId=4 size=6;averts,advertPosition>
+			 <div class="conbox">
+			     <#list averts as avert>
+					 <div><a href="#" title=""><img src="${avert.imgUrl}" width="1000" height="355" /></a></div>
+				</#list>
+			</div>
+			<div class="switcher">
+				<#list 1..(averts?size) as i>
+					    <#if i==1>
+					         <a href="#" class="cur">${i}</a>
+					    <#else>
+					         <a href="#">${i}</a>
+					    </#if>
+			   </#list>
+			</div>
+		</@_advert_list>
+</div>
+<div class="mian">
+<div class="matter2">
+            	<div class="info">
+                	<div class="title"></div>
+                </div>
+                <div class="choose">
+                	<div class="select1">
+                    	<ul>
+                            <@_channel_list pId=45 fields='sort' sort='asc';channels>
+						      <#list channels as chl>
+						           <#if chl.code == channel.code>
+						                <li class="se1"><a href="${path}/channel/${chl.code}">${chl.name}</a></li>
+						           <#else>
+						                <li><a href="${path}/channel/${chl.code}">${chl.name}</a></li>
+						           </#if>
+						      </#list> 
+				            </@_channel_list>
+                        </ul>
+                    </div>
+                </div>
+              <div class="content">
+	               <@_content_list model=6  size=16 channelCode="${channel.code}";contents,channel>
+	                        <#list contents as content>
+	                        <div class="prod">
+		                        <div class="tip"><a href="photo详细.html"><img src="${content.imgUrl}" width="205" height="125" onload="javascript:DrawImage(this,205,125)"></a></div>
+		                        <div class="scrt">
+		                            <div class="zt"><a href="#">${content.title}</a></div>
+		                            <div class="rq">${content.createTime?substring(0,10)}</div>
+		                        </div>
+	              		    </div>
+	                        </#list>
+	                </@_content_list>
+                </div>
+                <div class="digg"><span class="disabled"> < </span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2"> > </a></div>
+            </div>
+ </div>
+<#include "../include/footer.html"/>
+</body>
+</html>

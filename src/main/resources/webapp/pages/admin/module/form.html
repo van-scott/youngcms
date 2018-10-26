@@ -1,0 +1,151 @@
+<#include "/admin/inc/ctx.html">
+<style type="text/css">
+#menuContent{position: absolute;z-index: 1000;left: 150px;top: 30px;display: block;display: none;background: #f2f2f2;}
+.ztreeSty{margin-top:0;overflow-y:scroll; width:180px;height:150px;}
+</style>
+<script type="text/javascript">
+var setting = {
+		async : {
+			enable: true,
+			url:ctx+"/admin/module/simpleNodes",
+			autoParam:["id=parent_module_id"]
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		check : {
+			enable : true,
+			chkStyle: "radio",
+			radioType: "all"
+		},
+		callback : {
+			onClick : onClick,
+			onCheck : onCheck
+		}
+	};
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.checkNode(treeNode, !treeNode.checked, null, true);
+		return false;
+	}
+	function onCheck(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+		nodes = zTree.getCheckedNodes(true),
+		v = "";
+		id = "";
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v  = nodes[i].name ;
+			id = nodes[i].id ;
+		}
+		$("#pName").attr("value", v);
+		$("#pId").attr("value", id);
+	}
+
+	function showMenu() {
+		var cityObj = $("#pName",$.pdialog.getCurrent());
+		var cityOffset = $("#pName",$.pdialog.getCurrent()).offset();
+		$("#menuContent",$.pdialog.getCurrent()).slideDown("fast");
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "pName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+			hideMenu();
+		}
+	}
+	$(document).ready(function(){
+		 $.fn.zTree.init($("#treeDemo"), setting);
+	});
+	
+</script>
+ <div class="pageContent">
+	<form method="post" action="${ctx}/admin/module/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }">
+		<div class="pageFormContent" layoutH="56">
+	            <p>
+					<label>父类模块</label>
+					 <input type="text"  id="pName" value="${(pageForm.pName)! }" onclick="showMenu()" readonly="readonly" />
+					 <input type="hidden" name="pId" id="pId" value="${(pageForm.pId)! }">
+				</p>
+				<p>
+					<label>模块名称</label>
+					<input type="text" name="name" class="required" value="${(pageForm.name)! }"/>
+				</p>
+				<p>
+					<label>URL</label>
+					<input type="text"   name="href" class="required" value="${(pageForm.href)! }">
+				</p>
+				<p>
+					<label>tabId</label>
+					<input type="text" name="tabId" value="${(pageForm.tabId)! }"/>
+				</p>
+				
+				<p>
+					<label>菜单类型</label>
+					<select name="moduleType" >
+					   <#list MODULE_TYPE_LIST as labelAndValue>
+					       <option value="${labelAndValue.value }" <#if pageForm.moduleType?? && pageForm.moduleType?c==labelAndValue.value> selected="selected"</#if>>${labelAndValue.label }</option>
+					   </#list>
+					</select>
+				</p>
+				<p>
+					<label>授权</label>
+					<input type="text" name="authorize" value="${(pageForm.authorize)! }"/>
+				</p>
+				<p>
+					<label>图标</label>
+					<input type="text" name="icon" value="${(pageForm.icon)! }"/>
+				</p>
+				<p>
+					<label>是否树状</label>
+					<select name="isTree" >
+					       <option value="1" <#if pageForm.isTree?? && pageForm.isTree==1> selected="selected"</#if>>否</option>
+					       <option value="2" <#if pageForm.isTree?? && pageForm.isTree==2> selected="selected"</#if>>是</option>
+					</select>
+				</p>
+				<p>
+					<label>树URL</label>
+					<input type="text" name="treeUrl" value="${(pageForm.treeUrl)! }"/>
+				</p>
+				<p>
+					<label>排序</label>
+					<input type="text" name="sort" class="required" value="${(pageForm.sort)! }"/>
+				</p>
+				<p>
+					<label>打开方式</label>
+					<select name="external" >
+					       <option value="false" <#if pageForm.external?? && pageForm.external=='false'> selected="selected"</#if>>原始</option>
+					       <option value="true" <#if pageForm.external?? && pageForm.external=='true'> selected="selected"</#if>>ifream</option>
+					</select>
+				</p>
+				<p>
+					<label>功能</label>
+					<span>
+						<input type="checkbox" name="functions" value="1"/>页面
+						<input type="checkbox" name="functions" value="2"/>新增修改
+						<input type="checkbox" name="functions" value="3"/>删除
+					</span>
+				</p>
+				
+		</div>
+		<div id="menuContent">
+		        <ul id="treeDemo" class="ztree ztreeSty"></ul>
+	        </div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:module:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	
+</div>

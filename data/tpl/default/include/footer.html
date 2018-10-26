@@ -1,0 +1,17 @@
+<footer data-module="10001" data-classnow="10001">
+	<div class="inner">
+		<div class="foot-nav">
+				<@channelList isNav=1 fields='sort' sort='asc';channels>
+				   <#list channels as channel>
+				       <a href='${path}/channel/${channel.code}' title='公司动态'>${channel.name}</a><span>|</span>
+				   </#list> 
+				</@channelList>
+		</div>
+		<div class="foot-text">
+			<p> 
+				版权所有2008-2012    京ICP备12051136号
+			</p>
+		</div>
+	</div>
+</footer>
+<script src="${path}/static/default/js/fun.inc.js" type="text/javascript"></script>

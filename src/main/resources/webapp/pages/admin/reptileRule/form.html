@@ -1,0 +1,87 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/reptileRule/addOrUpdate" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="45">
+	     	<p>
+				<label>名称</label> <input type="text" name="name" value="${(pageForm.name)! }" />
+			</p>
+			<p>
+				<label>编码格式</label> <input type="text" name="coding" value="${(pageForm.coding)! }"/>
+			</p>
+	     	<p>
+				<label>采集数量</label> <input type="text" name="number" value="${(pageForm.number)! }" />
+			</p>
+			<p>
+				<label>时间格式</label> <input type="text" name="timeFormat" value="${(pageForm.timeFormat)! }"/>
+			</p>
+		    <p>
+				<label>内容补全URL</label> <input type="text" name="contentCompletionUrl" value="${(pageForm.contentCompletionUrl)! }" />
+			</p>
+			<p>
+				<label>图片补全URL</label> <input type="text" name="imageCompletionUrl" value="${(pageForm.imageCompletionUrl)! }"/>
+			</p>
+		     <p class="nowrap">
+				<label>采集地址</label>
+				<textarea name="reptileUrl" cols="50" rows="4">${(pageForm.reptileUrl)! }</textarea>
+			</p>
+		     <p class="nowrap">
+				<label>内容集合</label>
+				<textarea name="contentAllStart" cols="50" rows="4">${(pageForm.contentAllStart)! }</textarea>
+				<textarea name="contentAllEnd" cols="50" rows="4">${(pageForm.contentAllEnd)! }</textarea>
+			</p>
+		     <p class="nowrap">
+				<label>标题</label>
+				<textarea name="titleStart" cols="50" rows="4">${(pageForm.titleStart)! }</textarea>
+				<textarea name="titleEnd" cols="50" rows="4">${(pageForm.titleEnd)! }</textarea>
+			</p>
+		     <p class="nowrap">
+				<label>关键字</label>
+				<textarea name="keywordsStart" cols="50" rows="4">${(pageForm.keywordsStart)! }</textarea>
+				<textarea name="keywordsEnd" cols="50" rows="4">${(pageForm.keywordsEnd)! }</textarea>
+			</p>
+		     <p class="nowrap">
+				<label>描述</label>
+				<textarea name="descriptionStart" cols="50" rows="4">${(pageForm.descriptionStart)! }</textarea>
+				<textarea name="descriptionEnd" cols="50" rows="4">${(pageForm.descriptionEnd)! }</textarea>
+			</p>
+		     <p class="nowrap">
+				<label>内容</label>
+				<textarea name="contentStart" cols="50" rows="4">${(pageForm.contentStart)! }</textarea>
+				<textarea name="contentEnd" cols="50" rows="4">${(pageForm.contentEnd)! }</textarea>
+			</p>
+		    <p class="nowrap">
+				<label>发布时间</label>
+				<textarea name="publishTimeStart" cols="50" rows="4">${(pageForm.publishTimeStart)! }</textarea>
+				<textarea name="publishTimeEnd" cols="50" rows="4">${(pageForm.publishTimeEnd)!}</textarea>
+			</p>
+		    <p class="nowrap">
+				<label>作者</label>
+				<textarea name="authorStart" cols="50" rows="4">${(pageForm.authorStart)! }</textarea>
+				<textarea name="authorEnd" cols="50" rows="4">${(pageForm.authorEnd)! }</textarea>
+			</p>
+		    <p class="nowrap">
+				<label>来源</label>
+				<textarea name="sourceStart" cols="50" rows="4">${(pageForm.sourceStart)! }</textarea>
+				<textarea name="sourceEnd" cols="50" rows="4">${(pageForm.sourceEnd)! }</textarea>
+			</p>
+			<p class="nowrap">
+				<label>访问量</label>
+				<textarea name="readNumberStart" cols="50" rows="4">${(pageForm.readNumberStart)! }</textarea>
+				<textarea name="readNumberEnd" cols="50" rows="4">${(pageForm.readNumberEnd)! }</textarea>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:reptileRule:addOrUpdate">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				</@shiro.hasPermission>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+

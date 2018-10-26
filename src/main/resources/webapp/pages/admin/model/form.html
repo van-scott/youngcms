@@ -1,0 +1,128 @@
+<#include "/admin/inc/ctx.html">
+<script type="text/javascript">
+var modelForm={
+		addColumn:function(){
+			var l=$(".columns tbody tr",$.pdialog.getCurrent()).length;
+			var id="row"+(l+1);
+			var select="<select name='fieldType'>";
+			var extendFieldListStr='${(extendFieldTypeListStr)!}';
+			var extendFieldList=eval('('+extendFieldListStr+')');
+			for(var i=0;i<extendFieldList.length;i++){
+				var extendField=extendFieldList[i];
+				select+="<option value='"+extendField.value+"'>"+extendField.label+"</option>";
+			}
+			select+="</select>"
+			var tr="<tr id='"+id+"'>";
+			    tr+="<td><input type='text' size='10' name='fieldCode' class='required alphanumeric'/></td>";
+			    tr+="<td><input type='text' size='10' name='fieldName' class='required' /></td>";
+			    tr+="<td>"+select+"</td>";
+			    tr+="<td><input type='checkbox' name='isMust' value='1'/></td>";
+			    tr+="<td><input type='text' size='10' name='defaultValue'/></td>";
+			    tr+="<td><input type='checkbox' name='isSingleRow' value='1'/></td>";
+			    tr+="<td><textarea rows='2' cols='25' name='options' placeholder='多个值用\",\"分割'></textarea></td>";
+			    tr+="<td><a href='javascript:modelForm.delRow(\""+id+"\")'>删除</a></td>";
+			    tr+="</tr>";
+			$(".columns tbody",$.pdialog.getCurrent()).append(tr);
+			$(".columns tbody",$.pdialog.getCurrent()).initUI();
+		},
+		delRow:function(id){
+			$("#"+id,$.pdialog.getCurrent()).remove();
+		},
+		sub:function(){
+			var c = $("input[type='checkbox']",$.pdialog.getCurrent());
+			for(var i=0;i<c.length;i++){
+				 if(!(c[i].checked)){ 
+					   c[i].checked = true; 
+	                   c[i].value = "0";  
+	               }  
+			}
+			var pageFormContent=$(".pageForm",$.pdialog.getCurrent());
+			validateCallback(pageFormContent, dialogAjaxDone);
+		}
+};
+</script>
+<div class="pageContent">
+	<form method="post" action="${ctx}/admin/model/addOrUpdate" class="pageForm required-validate">
+		<input type="hidden" name="id" value="${(pageForm.id)! }"/>
+		<div class="pageFormContent" layoutH="56">
+			<p class="nowrap">
+				<label>模型名称</label> <input type="text" name="name" value="${(pageForm.name)! }"   class="required"/>
+			</p>
+			<p>
+				<label>有内容</label>
+				<#list YES_OR_NO as labelValue>
+				      <input type="radio" name="hasContent" value="${(labelValue.value)! }" <#if pageForm.hasContent?? &&  labelValue.value==pageForm.hasContent?c>checked="checked"</#if> />${labelValue.label }
+				</#list>
+			</p>
+			<p>
+				<label>有视频列表</label>
+				<#list YES_OR_NO as  labelValue>
+				         <input type="radio" name="hasVedio" value="${labelValue.value }" <#if  pageForm.hasVedio?? && labelValue.value==pageForm.hasVedio?c>checked="checked"</#if> />${labelValue.label }
+				</#list>
+			</p>
+			<p>
+				<label>有组图</label>
+				<#list YES_OR_NO as  labelValue>
+				         <input type="radio" name="hasGroupImages" value="${labelValue.value }" <#if pageForm.hasGroupImages?? && labelValue.value==pageForm.hasGroupImages?c>checked="checked"</#if> />${labelValue.label }
+				</#list>
+			</p>
+			<p>
+				<label>有附件列表</label>
+				<#list YES_OR_NO as  labelValue>
+				         <input type="radio" name="hasOptions" value="${labelValue.value }" <#if pageForm.hasOptions?? && labelValue.value==pageForm.hasOptions?c>checked="checked"</#if> />${labelValue.label }
+				</#list>
+			</p>
+			<p class="nowrap">
+			<a class="buttonActive" href="javascript:modelForm.addColumn();"><span>添加扩展字段</span></a>
+			<table  class="list nowrap columns" width="100%">
+						<thead>
+							<tr>
+							    <th>字段</th>
+							    <th>名称</th>
+							    <th>从枚举</th>
+							    <th>必填</th>
+							    <th>默认值</th>
+							    <th>单行</th>
+								<th>可选项</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <#list extendFieldList as extendField>
+						 <#assign id="row${extendField_index+1}">
+						    <tr id="${id}">
+						     <td><input name="fieldCode" type="text" size='10' value="${(extendField.fieldCode)!}"  class="required alphanumeric"/></td>
+						     <td><input name="fieldName" type="text" size='10' value="${(extendField.fieldName)!}" class="required"/></td>
+						     <td>
+						          <select name="fieldType">
+						              <#list extendFieldTypeList as extendFieldType>
+						                 <option value="${(extendFieldType.value)!}" <#if extendField.fieldType?? && extendField.fieldType?c==extendFieldType.value>selected="selected"</#if>>${(extendFieldType.label)!}</option>
+						              </#list>
+						          </select>
+						     </td>
+						     <td><input name="isMust" type="checkbox" value="1" <#if extendField.isMust==1>checked="checked"</#if> /></td>
+						     <td><input name="defaultValue" type="text" size='10' value="${(extendField.defaultValue)!}"/></td>
+						     <td><input name="isSingleRow" type="checkbox" value="1" <#if extendField.isSingleRow==1>checked="checked"</#if> /></td>
+						     <td><textarea rows="2" cols="25" name="options" placeholder='多个值用","分割'>${(extendField.options)!}</textarea></td>
+						     <td><a href='javascript:modelForm.delRow("${id}")'>删除</a></td>
+						     </tr>
+						 </#list>
+						</tbody>
+			</table>
+			</p>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <@shiro.hasPermission name="admin:model:addOrUpdate">
+				<li><a class="buttonActive" href="javascript:modelForm.sub();"><span>保存</span></a></li>
+			    </@shiro.hasPermission>	
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+
+

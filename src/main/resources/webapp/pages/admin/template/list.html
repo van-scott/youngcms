@@ -1,0 +1,82 @@
+<#include "/admin/inc/ctx.html">
+<div class="pageHeader">
+	<form id="pagerForm" onsubmit="return navTabSearch(this);" action="${ctx}/admin/template/list">
+	<input type="hidden" name="absolutePath" value="${(source.absolutePath)!}"/>
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>模型名称：</label>
+				<input type="text" name="keywords"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		    <@shiro.hasPermission name="admin:template:mkdir">
+			<li><a class="add" href="${ctx}/admin/template/mkdir?parentPath=${encodeURL(source.absolutePath)}" target="dialog" width="320" height="150"><span>新建目录</span></a></li>
+			</@shiro.hasPermission>
+			<@shiro.hasPermission name="admin:template:form">
+			<li><a class="add" href="${ctx}/admin/template/form?parentPath=${encodeURL(source.absolutePath)}" target="navTab" ><span>新建模板</span></a></li>
+			</@shiro.hasPermission>
+			<li class="line">line</li>
+		</ul>
+	</div>
+
+	<div layoutH="133">
+	<table class="list"  targetType="navTab">
+		<thead>
+		  <tr>
+	        <th width="2%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+	        <th width="5%">文件名</th>
+	        <th width="5%">文件大小</th>
+	        <th width="5%">最后修改时间</th>
+            <th width="5%">操作</th>	      
+            </tr>
+		</thead>
+		<tbody>
+        <#list pageData as bean>
+	        <tr align="center" target="id" rel="${bean.id }">
+	        <td><input  type="checkbox" name="ids" value="${bean.id }" /></td>
+	        <td style="text-align: left;">
+	           <#if bean.documentType=='dir'>
+	             <img src="${ctx}/webapp/static/images/folder.gif">
+	           <#elseif bean.documentType=='html'>
+	             <img src="${ctx}/webapp/static/images/html.gif">
+	           <#else>
+	             <img src="${ctx}/webapp/static/images/unknow.gif">
+	           </#if>
+	           ${bean.name }
+	        </td>
+	        <td>${bean.len }</td>
+	        <td>${bean.lastModified }</td>
+			 <td>
+			    <@shiro.hasPermission name="admin:template:download">
+				<a href="/admin/template/download?absolutePath=${encodeURL(bean.absolutePath)}">下载</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:template:rename">
+				<a width="320" height="150" href="${ctx}/admin/template/rename?absolutePath=${encodeURL(bean.absolutePath)}&parentPath=${encodeURL(source.absolutePath)}" target="dialog">重命名</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:template:delete">
+				<a href="/admin/template/delete?absolutePath=${encodeURL(bean.absolutePath)}" title="确定要删除吗？" target="ajaxTodo" callback="ajaxTodoDone">删除</a>
+				</@shiro.hasPermission>
+				<@shiro.hasPermission name="admin:template:form">
+				<#if bean.documentType?? && bean.documentType == "html">
+				   <a href="/admin/template/form?absolutePath=${encodeURL(bean.absolutePath)}" target="navTab">编辑</a>
+			    </#if>
+			    </@shiro.hasPermission>
+			</td>
+	        </tr>
+           </#list>
+		</tbody>
+	</table>
+	</div>
+</div>
